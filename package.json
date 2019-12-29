@@ -32,11 +32,11 @@
         "react-dom": "^16.8.6"
     },
     "scripts": {
-        "build": "rollup -c --environment BUILD:production",
+        "build": "rollup -c",
         "build-watch": "rollup -c -w",
         "install-all": "npm i && cd example && npm i",
         "start-example": "cd example && npm start",
-        "build-example": "cd example && npm run build",
+        "build-example": "npm run build && cd example && npm run build",
         "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
         "test": "jest",
         "prepublishOnly": "npm run test && npm run lint",
