@@ -1,0 +1,36 @@
+$width: 450px;
+
+.emphasizer-editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    &__action {
+        padding: 0 0 10px 0;
+        > button {
+            margin-right: 10px;
+        }
+    }
+    &__container {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    &__item {
+        display: flex;
+        flex: 1;
+        min-width: $width;
+        max-width: $width;
+        padding: 5px 10px 5px 0;
+        padding: 5px 10px 5px 0;
+        > div {
+            flex: 0 0 80px;
+            &:first-child {
+                flex: 1;
+            }
+            &:last-child {
+                flex: 0;
+            }
+        }
+    }
+}

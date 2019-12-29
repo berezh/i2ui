@@ -1,0 +1,31 @@
+.color-picker {
+    display: flex;
+    height: 28px;
+    &__watch {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 0 2px #444;
+        display: inline-block;
+        cursor: pointer;
+        flex: 1;
+        display: flex;
+    }
+
+    &__color {
+        border-radius: 2px;
+        flex: 1;
+        margin: 3px;
+    }
+
+    &__popover {
+        position: absolute;
+        z-index: 2;
+    }
+    &__cover {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+    }
+}

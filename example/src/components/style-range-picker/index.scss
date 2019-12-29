@@ -1,0 +1,28 @@
+.style-picker {
+  display: block;
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  &__line {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    &:last-child {
+      border-bottom: none;
+    }
+    &__row {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      &--remove {
+        flex: none;
+      }
+      &--input {
+        flex: none;
+        flex-basis: 60px;
+        text-align: right;
+      }
+    }
+  }
+}
