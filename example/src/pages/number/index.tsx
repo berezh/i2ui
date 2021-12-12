@@ -12,7 +12,7 @@ import { ViewBox } from '../../components/view-box';
 import { BlockHeader } from '../../components/block-header';
 
 export const NumberPage: React.FC = () => {
-    const { numberProps, numberOptions } = useSelector<GlobalState, MainState>(state => state.main);
+    const { numberProps, numberOptions } = useSelector<GlobalState, MainState>((state) => state.main);
     const {
         fromStyle,
         toStyle,
@@ -23,7 +23,7 @@ export const NumberPage: React.FC = () => {
         decimalSeparator,
         groupDigits,
     } = numberProps;
-    const maxValue = basicMaxValue || Math.max(0, ...numberOptions.map(x => x.rate));
+    const maxValue = basicMaxValue || Math.max(0, ...numberOptions.map((x) => x.rate));
     const dispatch = useDispatch();
 
     return (
@@ -69,9 +69,9 @@ export const NumberPage: React.FC = () => {
                     <BlockHeader>Data</BlockHeader>
                     <TagCloudEditor
                         options={numberOptions}
-                        updateTagOption={params => dispatch(MainActions.updateNumberOption(params))}
-                        removeTagOption={index => dispatch(MainActions.removeNumberOption(index))}
-                        addTagOption={tag => dispatch(MainActions.addNumberOption(tag))}
+                        updateTagOption={(params) => dispatch(MainActions.updateNumberOption(params))}
+                        removeTagOption={(index) => dispatch(MainActions.removeNumberOption(index))}
+                        addTagOption={(tag) => dispatch(MainActions.addNumberOption(tag))}
                         reset={() => dispatch(MainActions.resetNumber())}
                     />
                 </div>

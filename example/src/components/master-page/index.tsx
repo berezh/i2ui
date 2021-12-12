@@ -9,14 +9,14 @@ interface Props {
     gitFileUrl?: string;
 }
 
-export const MasterPage: React.FC<Props> = props => {
+export const MasterPage: React.FC<Props> = (props) => {
     const { children, sidebar, gitFileUrl } = props;
     return (
         <Layout header={<MainMenu />} leftSidebar={sidebar} leftSidebarStyle={{ width: 300 }}>
             <div className="master-page">
                 {gitFileUrl ? (
                     <div className="master-page__sub-header">
-                        <a href={gitFileUrl} target="_blank">
+                        <a href={gitFileUrl} target="_blank" rel="noreferrer">
                             <img src="images\github-32.png"></img>
                             Source Code
                         </a>

@@ -7,12 +7,12 @@ interface Props {
     onChange: (value: string) => void;
 }
 
-export const ColorPicker: React.FC<Props> = props => {
+export const ColorPicker: React.FC<Props> = (props) => {
     const { color, onChange } = props;
     const [open, setOpen] = useState(false);
     const handleClick = useCallback(() => setOpen(!open), [open]);
     const handleClose = useCallback(() => setOpen(false), [open]);
-    const handleChange = useCallback<(color: string) => void>(color => {
+    const handleChange = useCallback<(color: string) => void>((color) => {
         onChange(color);
     }, []);
 
@@ -24,7 +24,7 @@ export const ColorPicker: React.FC<Props> = props => {
             {open ? (
                 <div className="color-picker__popover">
                     <div className="color-picker__cover" onClick={handleClose} />
-                    <SketchPicker color={color} onChange={color => handleChange(color.hex)} />
+                    <SketchPicker color={color} onChange={(color) => handleChange(color.hex)} />
                 </div>
             ) : null}
         </div>

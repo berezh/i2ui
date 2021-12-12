@@ -6,7 +6,7 @@ interface ControlLineProps {
     label: string;
 }
 
-export const ControlLine: React.FC<ControlLineProps> = props => {
+export const ControlLine: React.FC<ControlLineProps> = (props) => {
     const { children, label } = props;
     return (
         <div className="control-line">

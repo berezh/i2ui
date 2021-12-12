@@ -11,7 +11,7 @@ import { ButtonGroup, Button, NumericInput, InputGroup } from '@blueprintjs/core
 import './index.scss';
 
 export const NumberControlPanel: React.FC = () => {
-    const { numberProps } = useSelector<GlobalState, MainState>(state => state.main);
+    const { numberProps } = useSelector<GlobalState, MainState>((state) => state.main);
     const {
         fromStyle,
         toStyle,
@@ -25,58 +25,58 @@ export const NumberControlPanel: React.FC = () => {
     const dispatch = useDispatch();
 
     const handleChangeStyle = useCallback<(styleRange: StyleRange) => void>(
-        styleRange => {
+        (styleRange) => {
             dispatch(
                 MainActions.updateNumberProps({
                     ...numberProps,
                     fromStyle: styleRange.fromStyle,
                     toStyle: styleRange.toStyle,
-                }),
+                })
             );
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleVerticalAlign = useCallback<(verticalAlign: string | any) => void>(
-        verticalAlign => {
+        (verticalAlign) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, verticalAlign }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleFractionDigits = useCallback<(decimalDigits: number | undefined) => void>(
-        decimalDigits => {
+        (decimalDigits) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, decimalDigits }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleGroupDigits = useCallback<(groupDigits: number | undefined) => void>(
-        groupDigits => {
+        (groupDigits) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, groupDigits }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleBasicMaxValue = useCallback<(basicMaxValue: number | undefined) => void>(
-        basicMaxValue => {
+        (basicMaxValue) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, basicMaxValue }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleGroupSeparator = useCallback<(groupSeparator: string | undefined) => void>(
-        groupSeparator => {
+        (groupSeparator) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, groupSeparator }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     const handleDecimalSeparator = useCallback<(decimalSeparator: string | undefined) => void>(
-        decimalSeparator => {
+        (decimalSeparator) => {
             dispatch(MainActions.updateNumberProps({ ...numberProps, decimalSeparator }));
         },
-        [numberProps],
+        [numberProps]
     );
 
     return (
@@ -152,7 +152,7 @@ export const NumberControlPanel: React.FC = () => {
             <ControlLine label="fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ fromStyle: fromStyle, toStyle: toStyle }}
-                    onChange={styleRange => handleChangeStyle(styleRange)}
+                    onChange={(styleRange) => handleChangeStyle(styleRange)}
                 />
             </ControlLine>
         </div>

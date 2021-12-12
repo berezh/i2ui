@@ -36,7 +36,7 @@ export class Panel extends React.Component<PanelProps> {
         const { className, style, children, innerSpacing } = this.props as InternalProps;
         const css = this.extendStyle({ ...this.style, ...style });
 
-        LayoutUtil.validateChildrenType(children, x => x.isCell, 'Children type must be `Cell`');
+        LayoutUtil.validateChildrenType(children, (x) => x.isCell, 'Children type must be `Cell`');
         return (
             <div className={className} style={css}>
                 {LayoutUtil.extendChildren(children, { innerSpacing })}

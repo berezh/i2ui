@@ -10,20 +10,20 @@ interface Props {
     onChange: (name: string, value?: string) => void;
 }
 
-export const StyleValueInput: React.FC<Props> = props => {
+export const StyleValueInput: React.FC<Props> = (props) => {
     const { name, value, onChange } = props;
 
     const iputChange = useCallback<(e: React.ChangeEvent<HTMLInputElement>) => void>(
-        e => {
+        (e) => {
             onChange(name, e.currentTarget.value);
         },
-        [name],
+        [name]
     );
     const colorChange = useCallback<(newValue: string) => void>(
-        newValue => {
+        (newValue) => {
             onChange(name, newValue);
         },
-        [name],
+        [name]
     );
 
     return StyleKeys.isColor(name) ? (

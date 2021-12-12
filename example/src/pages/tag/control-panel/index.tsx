@@ -12,28 +12,28 @@ import { BlockHeader } from '../../../components/block-header';
 import './index.scss';
 
 export const TagControlPanel: React.FC = () => {
-    const { tagProps } = useSelector<GlobalState, MainState>(state => state.main);
+    const { tagProps } = useSelector<GlobalState, MainState>((state) => state.main);
     const { order, fromStyle, toStyle } = tagProps;
     const dispatch = useDispatch();
 
     const handleChangeOrder = useCallback<(order?: TagCloudOrder) => void>(
-        order => {
+        (order) => {
             dispatch(MainActions.updateTagProps({ ...tagProps, order }));
         },
-        [tagProps],
+        [tagProps]
     );
 
     const handleChangeStyle = useCallback<(styleRange: StyleRange) => void>(
-        styleRange => {
+        (styleRange) => {
             dispatch(
                 MainActions.updateTagProps({
                     ...tagProps,
                     fromStyle: styleRange.fromStyle,
                     toStyle: styleRange.toStyle,
-                }),
+                })
             );
         },
-        [tagProps],
+        [tagProps]
     );
 
     return (
@@ -71,7 +71,7 @@ export const TagControlPanel: React.FC = () => {
             <ControlLine label="fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ fromStyle: fromStyle, toStyle: toStyle }}
-                    onChange={styleRange => handleChangeStyle(styleRange)}
+                    onChange={(styleRange) => handleChangeStyle(styleRange)}
                 />
             </ControlLine>
         </div>

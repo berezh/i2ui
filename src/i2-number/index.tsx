@@ -32,7 +32,7 @@ const numberPartStyle: React.CSSProperties = {
     lineHeight: '1em',
 };
 
-export const I2Number: React.FC<I2NumberProps> = props => {
+export const I2Number: React.FC<I2NumberProps> = (props) => {
     const {
         value,
         fromStyle,

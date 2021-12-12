@@ -10,14 +10,14 @@ const plugins = [
     }),
     scss({
         output: false,
-    }), 
+    }),
 ];
 
 if (process.env.BUILD === 'production') {
     plugins.push(
         uglify({
             nameCache: {},
-        }),
+        })
     );
 }
 

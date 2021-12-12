@@ -13,19 +13,19 @@ interface Props {
     reset: () => void;
 }
 
-export const EmphasizerEditor: React.FC<Props> = props => {
+export const EmphasizerEditor: React.FC<Props> = (props) => {
     const { options, updateTagOption, removeTagOption, addTagOption, reset } = props;
     const [isAddOpen, setIsAddOpen] = useState(false);
 
-    const handleChange = useCallback<(params: IndexEuStateOption) => void>(params => {
+    const handleChange = useCallback<(params: IndexEuStateOption) => void>((params) => {
         updateTagOption({ ...params });
     }, []);
 
-    const handleRemove = useCallback<(index: number) => void>(index => {
+    const handleRemove = useCallback<(index: number) => void>((index) => {
         removeTagOption(index);
     }, []);
 
-    const handleAddTag = useCallback<(tag: EuStateOption) => void>(tag => {
+    const handleAddTag = useCallback<(tag: EuStateOption) => void>((tag) => {
         addTagOption(tag);
         setIsAddOpen(false);
     }, []);
@@ -60,28 +60,28 @@ export const EmphasizerEditor: React.FC<Props> = props => {
                             <NumericInput
                                 buttonPosition="none"
                                 value={x.population}
-                                onValueChange={value => handleChange({ ...x, index: i, population: value })}
+                                onValueChange={(value) => handleChange({ ...x, index: i, population: value })}
                             />
                         </div>
                         <div>
                             <NumericInput
                                 buttonPosition="none"
                                 value={x.area}
-                                onValueChange={value => handleChange({ ...x, index: i, area: value })}
+                                onValueChange={(value) => handleChange({ ...x, index: i, area: value })}
                             />
                         </div>
                         <div>
                             <NumericInput
                                 buttonPosition="none"
                                 value={x.gdpTotal}
-                                onValueChange={value => handleChange({ ...x, index: i, gdpTotal: value })}
+                                onValueChange={(value) => handleChange({ ...x, index: i, gdpTotal: value })}
                             />
                         </div>
                         <div>
                             <NumericInput
                                 buttonPosition="none"
                                 value={x.gdpCapital}
-                                onValueChange={value => handleChange({ ...x, index: i, gdpCapital: value })}
+                                onValueChange={(value) => handleChange({ ...x, index: i, gdpCapital: value })}
                             />
                         </div>
                         <div>

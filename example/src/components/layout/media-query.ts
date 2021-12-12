@@ -17,11 +17,11 @@ export interface MediaQueryOptions extends MediaQueryConditions {
 export function getMatchedOptions(
     width: number,
     heigth: number,
-    conditions: MediaQueryOptions | MediaQueryOptions[],
+    conditions: MediaQueryOptions | MediaQueryOptions[]
 ): undefined | MediaQueryOptions {
     if (Array.isArray(conditions)) {
         let result: MediaQueryOptions = {};
-        conditions.map(x => {
+        conditions.map((x) => {
             result = { ...result, ...getSingleMatchedOptions(width, heigth, x) };
         });
     } else {
@@ -34,7 +34,7 @@ export function getMatchedOptions(
 function getSingleMatchedOptions(
     width: number,
     heigth: number,
-    conditions: MediaQueryOptions,
+    conditions: MediaQueryOptions
 ): undefined | MediaQueryOptions {
     const result: boolean[] = [];
     if (conditions.minWidth) {
@@ -50,7 +50,7 @@ function getSingleMatchedOptions(
         result.push(conditions.maxHeigth <= heigth);
     }
 
-    if (result.length > 0 && result.filter(x => x === true).length === result.length) {
+    if (result.length > 0 && result.filter((x) => x === true).length === result.length) {
         return conditions;
     }
 }

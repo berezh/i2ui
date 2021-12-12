@@ -19,9 +19,9 @@ export interface TagProps {
     rate: number;
 }
 
-export const TagCloud: React.FC<TagCloudProps> = props => {
+export const TagCloud: React.FC<TagCloudProps> = (props) => {
     const { options: data, fromStyle, toStyle, order, className, style, renderOption } = props;
-    const rates: number[] = data.map(x => x.rate);
+    const rates: number[] = data.map((x) => x.rate);
     const min: number = Math.min(...rates);
     const max: number = Math.max(...rates);
 

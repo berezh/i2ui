@@ -14,7 +14,7 @@ interface FormSelectProps {
 
 type Props = FormSelectProps;
 
-export const OptionSelect: React.FC<Props> = props => {
+export const OptionSelect: React.FC<Props> = (props) => {
     const { options, placeholder, value, onChange } = props;
 
     const itemRender: ItemRenderer<SelectOption> = (option, { handleClick, modifiers }) => {
@@ -37,15 +37,15 @@ export const OptionSelect: React.FC<Props> = props => {
     };
 
     const onItemSelect = useCallback<(item: SelectOption) => void>(
-        item => {
+        (item) => {
             if (onChange) {
                 onChange(item ? item.value : undefined);
             }
         },
-        [onChange],
+        [onChange]
     );
 
-    const activeItem = options.find(x => x.value === value);
+    const activeItem = options.find((x) => x.value === value);
     const caption = activeItem ? activeItem.name : placeholder || 'Select';
 
     return (

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 type Props = RouteComponentProps;
 
-export const Component: React.FC<Props> = props => {
+export const Component: React.FC<Props> = (props) => {
     const {
         match: { path },
     } = props;

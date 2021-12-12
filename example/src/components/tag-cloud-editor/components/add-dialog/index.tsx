@@ -10,7 +10,7 @@ interface AddTagDialogProps {
     onCancel: () => void;
 }
 
-export const AddTagDialog: React.FC<AddTagDialogProps> = props => {
+export const AddTagDialog: React.FC<AddTagDialogProps> = (props) => {
     const { isOpen, onCancel, onAdd } = props;
     const [enabled, setEnabled] = useState(false);
     const [text, setText] = useState('');
@@ -21,7 +21,7 @@ export const AddTagDialog: React.FC<AddTagDialogProps> = props => {
             setText(value);
             setEnabled(value && rate ? true : false);
         },
-        [rate],
+        [rate]
     );
 
     const handleRate = useCallback(
@@ -29,7 +29,7 @@ export const AddTagDialog: React.FC<AddTagDialogProps> = props => {
             setRate(valueAsString);
             setEnabled(valueAsString && text ? true : false);
         },
-        [text],
+        [text]
     );
 
     const handleClose = useCallback(() => {

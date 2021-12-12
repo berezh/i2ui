@@ -10,7 +10,7 @@ interface AddTagDialogProps {
     onCancel: () => void;
 }
 
-export const AddStateDialog: React.FC<AddTagDialogProps> = props => {
+export const AddStateDialog: React.FC<AddTagDialogProps> = (props) => {
     const { isOpen, onCancel, onAdd } = props;
     const [enabled, setEnabled] = useState(false);
     const [name, setName] = useState('');
@@ -25,7 +25,7 @@ export const AddStateDialog: React.FC<AddTagDialogProps> = props => {
                 (population ? true : false) &&
                 (area ? true : false) &&
                 (gdpTotal ? true : false) &&
-                (gdpCapital ? true : false),
+                (gdpCapital ? true : false)
         );
     }
 

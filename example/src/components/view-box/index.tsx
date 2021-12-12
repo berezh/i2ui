@@ -5,7 +5,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-export const ViewBox: React.FC<Props> = props => {
+export const ViewBox: React.FC<Props> = (props) => {
     const { children } = props;
     return <div className="view-box">{children}</div>;
 };

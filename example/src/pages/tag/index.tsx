@@ -15,7 +15,7 @@ export const TagPage: React.FC = () => {
     const {
         tagOptions,
         tagProps: { fromStyle, toStyle, order },
-    } = useSelector<GlobalState, MainState>(state => state.main);
+    } = useSelector<GlobalState, MainState>((state) => state.main);
     const dispatch = useDispatch();
 
     return (
@@ -71,9 +71,9 @@ export const TagPage: React.FC = () => {
                     <BlockHeader>Data</BlockHeader>
                     <TagCloudEditor
                         options={tagOptions}
-                        updateTagOption={params => dispatch(MainActions.updateTagOption(params))}
-                        removeTagOption={index => dispatch(MainActions.removeTagOption(index))}
-                        addTagOption={tag => dispatch(MainActions.addTagOption(tag))}
+                        updateTagOption={(params) => dispatch(MainActions.updateTagOption(params))}
+                        removeTagOption={(index) => dispatch(MainActions.removeTagOption(index))}
+                        addTagOption={(tag) => dispatch(MainActions.addTagOption(tag))}
                         reset={() => dispatch(MainActions.resetTag())}
                     />
                 </div>

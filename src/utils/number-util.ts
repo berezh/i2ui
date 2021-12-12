@@ -49,7 +49,7 @@ export class NumberUtil {
         }
         const digits = Math.abs(groupDigits || 3);
         const output: RegExpMatchArray | null = integer.match(
-            new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, 'g'),
+            new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, 'g')
         );
         // integer.match(/(\d+?)(?=(\d{3})+(?!\d)|$)/g);
         return output ? output : [];

@@ -18,20 +18,20 @@ export const EmphasizerPage: React.FC = () => {
     const {
         emphasizerOptions,
         emphasizerProps: { population, area, gdpTotal, gdpCapital },
-    } = useSelector<GlobalState, MainState>(state => state.main);
+    } = useSelector<GlobalState, MainState>((state) => state.main);
     const dispatch = useDispatch();
 
-    const maxPopulation = Math.max(0, ...emphasizerOptions.map(x => x.population));
-    const minPopulation = Math.min(0, ...emphasizerOptions.map(x => x.population));
+    const maxPopulation = Math.max(0, ...emphasizerOptions.map((x) => x.population));
+    const minPopulation = Math.min(0, ...emphasizerOptions.map((x) => x.population));
 
-    const maxArea = Math.max(0, ...emphasizerOptions.map(x => x.area));
-    const minArea = Math.min(0, ...emphasizerOptions.map(x => x.area));
+    const maxArea = Math.max(0, ...emphasizerOptions.map((x) => x.area));
+    const minArea = Math.min(0, ...emphasizerOptions.map((x) => x.area));
 
-    const maxGdpTotal = Math.max(0, ...emphasizerOptions.map(x => x.gdpTotal));
-    const minGdpTotal = Math.min(0, ...emphasizerOptions.map(x => x.gdpTotal));
+    const maxGdpTotal = Math.max(0, ...emphasizerOptions.map((x) => x.gdpTotal));
+    const minGdpTotal = Math.min(0, ...emphasizerOptions.map((x) => x.gdpTotal));
 
-    const maxGdpCapital = Math.max(0, ...emphasizerOptions.map(x => x.gdpCapital));
-    const minGdpCapital = Math.min(0, ...emphasizerOptions.map(x => x.gdpCapital));
+    const maxGdpCapital = Math.max(0, ...emphasizerOptions.map((x) => x.gdpCapital));
+    const minGdpCapital = Math.min(0, ...emphasizerOptions.map((x) => x.gdpCapital));
 
     return (
         <MasterPage
@@ -54,7 +54,7 @@ export const EmphasizerPage: React.FC = () => {
                                                         population.toStyle,
                                                         minPopulation,
                                                         maxPopulation,
-                                                        x.population,
+                                                        x.population
                                                     )}
                                                     title={`Population ${numeral(x.population).format('0.00a')}`}
                                                 >
@@ -64,7 +64,7 @@ export const EmphasizerPage: React.FC = () => {
                                                             population.toIconSize,
                                                             minPopulation,
                                                             maxPopulation,
-                                                            x.population,
+                                                            x.population
                                                         )}
                                                         icon="people"
                                                     />
@@ -77,7 +77,7 @@ export const EmphasizerPage: React.FC = () => {
                                                         area.toStyle,
                                                         minArea,
                                                         maxArea,
-                                                        x.area,
+                                                        x.area
                                                     )}
                                                     title={`Area: ${numeral(x.area).format('0.00a')} (km²)`}
                                                 >
@@ -87,7 +87,7 @@ export const EmphasizerPage: React.FC = () => {
                                                             area.toIconSize,
                                                             minArea,
                                                             maxArea,
-                                                            x.area,
+                                                            x.area
                                                         )}
                                                         icon="map"
                                                     />
@@ -100,10 +100,10 @@ export const EmphasizerPage: React.FC = () => {
                                                         gdpTotal.toStyle,
                                                         minGdpTotal,
                                                         maxGdpTotal,
-                                                        x.gdpTotal,
+                                                        x.gdpTotal
                                                     )}
                                                     title={`GDP (Total): $${numeral(x.gdpTotal * 1000000).format(
-                                                        '0.00a',
+                                                        '0.00a'
                                                     )}`}
                                                 >
                                                     <Icon
@@ -112,7 +112,7 @@ export const EmphasizerPage: React.FC = () => {
                                                             gdpTotal.toIconSize,
                                                             minGdpTotal,
                                                             maxGdpTotal,
-                                                            x.gdpTotal,
+                                                            x.gdpTotal
                                                         )}
                                                         icon="euro"
                                                     />
@@ -125,10 +125,10 @@ export const EmphasizerPage: React.FC = () => {
                                                         gdpCapital.toStyle,
                                                         minGdpCapital,
                                                         maxGdpCapital,
-                                                        x.gdpCapital,
+                                                        x.gdpCapital
                                                     )}
                                                     title={`GDP (Per Capital): $${numeral(x.gdpCapital).format(
-                                                        '0.00a',
+                                                        '0.00a'
                                                     )}`}
                                                 >
                                                     <Icon
@@ -137,7 +137,7 @@ export const EmphasizerPage: React.FC = () => {
                                                             gdpCapital.toIconSize,
                                                             minGdpCapital,
                                                             maxGdpCapital,
-                                                            x.gdpCapital,
+                                                            x.gdpCapital
                                                         )}
                                                         icon="bank-account"
                                                     />
@@ -154,16 +154,16 @@ export const EmphasizerPage: React.FC = () => {
                     <BlockHeader>Data</BlockHeader>
                     <EmphasizerEditor
                         options={emphasizerOptions}
-                        updateTagOption={params => {
+                        updateTagOption={(params) => {
                             const { index, ...option } = params;
                             emphasizerOptions[index] = { ...option };
                             dispatch(MainActions.updateEmphasizerOptions(emphasizerOptions));
                         }}
-                        removeTagOption={index => {
+                        removeTagOption={(index) => {
                             emphasizerOptions.splice(index, 1);
                             dispatch(MainActions.updateEmphasizerOptions(emphasizerOptions));
                         }}
-                        addTagOption={tag => {
+                        addTagOption={(tag) => {
                             emphasizerOptions.push(tag);
                             dispatch(MainActions.updateEmphasizerOptions(emphasizerOptions));
                         }}

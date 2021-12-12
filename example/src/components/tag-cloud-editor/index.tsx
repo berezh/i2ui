@@ -14,7 +14,7 @@ interface TagCloudEditorProps {
     reset: () => void;
 }
 
-export const TagCloudEditor: React.FC<TagCloudEditorProps> = props => {
+export const TagCloudEditor: React.FC<TagCloudEditorProps> = (props) => {
     const { options, updateTagOption, removeTagOption, addTagOption, reset } = props;
     const [isAddOpen, setIsAddOpen] = useState(false);
 
@@ -22,11 +22,11 @@ export const TagCloudEditor: React.FC<TagCloudEditorProps> = props => {
         updateTagOption({ index, name, rate });
     }, []);
 
-    const handleRemove = useCallback<(index: number) => void>(index => {
+    const handleRemove = useCallback<(index: number) => void>((index) => {
         removeTagOption(index);
     }, []);
 
-    const handleAddTag = useCallback<(tag: TagProps) => void>(tag => {
+    const handleAddTag = useCallback<(tag: TagProps) => void>((tag) => {
         addTagOption(tag);
         setIsAddOpen(false);
     }, []);
@@ -61,7 +61,7 @@ export const TagCloudEditor: React.FC<TagCloudEditorProps> = props => {
                             <NumericInput
                                 buttonPosition="none"
                                 value={x.rate}
-                                onValueChange={value => handleChange(i, x.text, value)}
+                                onValueChange={(value) => handleChange(i, x.text, value)}
                             />
                         </div>
                         <div>

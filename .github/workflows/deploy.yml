@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BUILD: production
     steps:
       - uses: actions/checkout@v1
         

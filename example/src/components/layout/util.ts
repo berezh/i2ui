@@ -4,9 +4,9 @@ export class LayoutUtil {
     public static validateChildrenType<TProps = any>(
         children: React.ReactNode,
         accessor: (props: TProps) => boolean | undefined,
-        exceptionText: string,
+        exceptionText: string
     ): void {
-        React.Children.toArray(children).forEach(x => {
+        React.Children.toArray(children).forEach((x) => {
             const child = x as any;
             if (child && child.props) {
                 if (accessor(child.props) !== true) {
@@ -30,10 +30,10 @@ export class LayoutUtil {
     public static extend<TProps = any>(
         children: React.ReactNode,
         condition: (props: TProps) => boolean | undefined,
-        extendProps: any,
+        extendProps: any
     ): any[] {
         const childrenSet = React.Children.toArray(children);
-        return childrenSet.map(child => {
+        return childrenSet.map((child) => {
             if (LayoutUtil.hasProperty(child, condition)) {
                 return React.cloneElement(child as any, extendProps);
             } else {
@@ -44,7 +44,7 @@ export class LayoutUtil {
 
     public static hasProperty<TProps = any>(
         child: any,
-        condition: (props: TProps) => boolean | undefined,
+        condition: (props: TProps) => boolean | undefined
     ): boolean | undefined {
         if (child && child.props) {
             return condition(child.props);

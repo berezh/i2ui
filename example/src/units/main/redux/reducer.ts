@@ -10,13 +10,13 @@ import { EuStates } from '../../../data/eu';
 import { EuStateOption } from '../../../interfaces';
 
 function getFranceCitiesOptions(): TagProps[] {
-    return FranceCities.map(x => {
+    return FranceCities.map((x) => {
         return { text: x[0] as string, rate: x[1] as number };
     });
 }
 
 function getEuStatesOptions(): EuStateOption[] {
-    return EuStates.map(x => {
+    return EuStates.map((x) => {
         return {
             name: x[0] as string,
             population: x[1] as number,
@@ -138,7 +138,7 @@ export const MainReducer: Reducer<MainState, Action> = ReducerUtil.wrapper(initi
         state.tagProps = { ...props };
         return { ...state };
     },
-    [MainTypes.TAG_RESET_PROPS]: state => {
+    [MainTypes.TAG_RESET_PROPS]: (state) => {
         state.tagProps = { ...getDefaultTagProps() };
         return { ...state };
     },
@@ -166,7 +166,7 @@ export const MainReducer: Reducer<MainState, Action> = ReducerUtil.wrapper(initi
         state.tagOptions = [...options];
         return { ...state };
     },
-    [MainTypes.RESET_TAG]: state => {
+    [MainTypes.RESET_TAG]: (state) => {
         const options = getFranceCitiesOptions();
         state.tagOptions = [...options];
         return { ...state };
@@ -176,7 +176,7 @@ export const MainReducer: Reducer<MainState, Action> = ReducerUtil.wrapper(initi
         state.numberProps = { ...props };
         return { ...state };
     },
-    [MainTypes.NUMBER_RESET_PROPS]: state => {
+    [MainTypes.NUMBER_RESET_PROPS]: (state) => {
         state.numberProps = { ...getDefaultNumberProps() };
         return { ...state };
     },
@@ -204,7 +204,7 @@ export const MainReducer: Reducer<MainState, Action> = ReducerUtil.wrapper(initi
         state.numberOptions = [...options];
         return { ...state };
     },
-    [MainTypes.RESET_NUMBER]: state => {
+    [MainTypes.RESET_NUMBER]: (state) => {
         const options = getFranceCitiesOptions();
         state.numberOptions = [...options];
         return { ...state };
@@ -214,11 +214,11 @@ export const MainReducer: Reducer<MainState, Action> = ReducerUtil.wrapper(initi
         state.emphasizerProps = { ...props };
         return { ...state };
     },
-    [MainTypes.EMPHASIZER_RESET_PROPS]: state => {
+    [MainTypes.EMPHASIZER_RESET_PROPS]: (state) => {
         state.emphasizerProps = getDefaultEmphasizerProps();
         return { ...state };
     },
-    [MainTypes.EMPHASIZER_RESET_OPTIONS]: state => {
+    [MainTypes.EMPHASIZER_RESET_OPTIONS]: (state) => {
         state.emphasizerOptions = getEuStatesOptions();
         return { ...state };
     },

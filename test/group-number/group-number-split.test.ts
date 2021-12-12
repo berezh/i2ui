@@ -27,5 +27,10 @@ it('NumberUtil.splitNumber groupSeparator', () => {
 });
 
 it('NumberUtil.splitNumber decimalSeparator', () => {
-    textSplitNumber(0.1, { decimalDigits: 1, decimalSeparator: testSeparator }, { text: '0' }, { text: '1', separator: testSeparator });
+    textSplitNumber(
+        0.1,
+        { decimalDigits: 1, decimalSeparator: testSeparator },
+        { text: '0' },
+        { text: '1', separator: testSeparator }
+    );
 });

@@ -12,7 +12,7 @@ import { NumberRangeInput } from '../../../components/number-range-input';
 import './index.scss';
 
 export const EmphasizerControlPanel: React.FC = () => {
-    const { emphasizerProps } = useSelector<GlobalState, MainState>(state => state.main);
+    const { emphasizerProps } = useSelector<GlobalState, MainState>((state) => state.main);
     const { population, area, gdpTotal, gdpCapital } = emphasizerProps;
     const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ export const EmphasizerControlPanel: React.FC = () => {
 
             dispatch(MainActions.updateEmphasizerProps(newProps));
         },
-        [emphasizerProps],
+        [emphasizerProps]
     );
 
     return (
@@ -56,7 +56,7 @@ export const EmphasizerControlPanel: React.FC = () => {
             <ControlLine label="box: fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ ...population }}
-                    onChange={styleRange =>
+                    onChange={(styleRange) =>
                         handleChangeProps({
                             ...population,
                             fromStyle: styleRange.fromStyle,
@@ -82,7 +82,7 @@ export const EmphasizerControlPanel: React.FC = () => {
             <ControlLine label="box: fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ ...area }}
-                    onChange={styleRange =>
+                    onChange={(styleRange) =>
                         handleChangeProps(undefined, {
                             ...area,
                             fromStyle: styleRange.fromStyle,
@@ -108,7 +108,7 @@ export const EmphasizerControlPanel: React.FC = () => {
             <ControlLine label="box: fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ fromStyle: gdpTotal.fromStyle, toStyle: gdpTotal.toStyle }}
-                    onChange={styleRange =>
+                    onChange={(styleRange) =>
                         handleChangeProps(undefined, undefined, {
                             ...gdpTotal,
                             fromStyle: styleRange.fromStyle,
@@ -134,7 +134,7 @@ export const EmphasizerControlPanel: React.FC = () => {
             <ControlLine label="box: fromStyle - toStyle">
                 <StyleRangePicker
                     styleRange={{ fromStyle: gdpCapital.fromStyle, toStyle: gdpCapital.toStyle }}
-                    onChange={styleRange =>
+                    onChange={(styleRange) =>
                         handleChangeProps(undefined, undefined, undefined, {
                             ...gdpCapital,
                             fromStyle: styleRange.fromStyle,

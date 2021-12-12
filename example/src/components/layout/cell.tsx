@@ -15,7 +15,7 @@ interface InternalProps extends CellProps {
     isCell: boolean;
 }
 
-export const Cell: React.FC<CellProps> = props => {
+export const Cell: React.FC<CellProps> = (props) => {
     const { className, style, children } = props;
     const { fixed, innerSpacing, isLast } = props as InternalProps;
     const css: React.CSSProperties = {
@@ -28,7 +28,7 @@ export const Cell: React.FC<CellProps> = props => {
 
     return (
         <div className={className} style={css}>
-            {LayoutUtil.extend(children, x => x.isGrid, { innerSpacing })}
+            {LayoutUtil.extend(children, (x) => x.isGrid, { innerSpacing })}
         </div>
     );
 };

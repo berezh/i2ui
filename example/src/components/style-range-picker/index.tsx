@@ -8,7 +8,7 @@ import { StyleRange } from '../../interfaces';
 
 import './index.scss';
 
-const styleOptions: Option[] = StyleKeys.keys.map<Option>(x => {
+const styleOptions: Option[] = StyleKeys.keys.map<Option>((x) => {
     return { value: x, name: x };
 });
 
@@ -23,7 +23,7 @@ interface Props {
     onChange: (styleRange: StyleRange) => void;
 }
 
-export const StyleRangePicker: React.FC<Props> = props => {
+export const StyleRangePicker: React.FC<Props> = (props) => {
     const { styleRange, onChange } = props;
 
     const onFromChange = useCallback<(name: string, value?: string) => void>(
@@ -31,7 +31,7 @@ export const StyleRangePicker: React.FC<Props> = props => {
             udpateStyle(styleRange.fromStyle, name, value);
             onChange(styleRange);
         },
-        [onChange],
+        [onChange]
     );
 
     const onToChange = useCallback<(name: string, value?: string) => void>(
@@ -39,7 +39,7 @@ export const StyleRangePicker: React.FC<Props> = props => {
             udpateStyle(styleRange.toStyle, name, value);
             onChange(styleRange);
         },
-        [onChange],
+        [onChange]
     );
 
     const addStyle = useCallback<(name?: string) => void>(
@@ -52,7 +52,7 @@ export const StyleRangePicker: React.FC<Props> = props => {
                 onChange(styleRange);
             }
         },
-        [onChange],
+        [onChange]
     );
 
     const removeStyle = useCallback<(name?: string) => void>(
@@ -65,15 +65,15 @@ export const StyleRangePicker: React.FC<Props> = props => {
                 onChange(styleRange);
             }
         },
-        [onChange],
+        [onChange]
     );
 
     const options = getOptions(styleRange);
-    const items = styleOptions.map<SelectOption>(so => {
+    const items = styleOptions.map<SelectOption>((so) => {
         return {
             value: so.value,
             name: so.name,
-            disabled: options.find(o => o.name === so.name) ? true : false,
+            disabled: options.find((o) => o.name === so.name) ? true : false,
         };
     });
 

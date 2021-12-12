@@ -35,10 +35,11 @@ class Component extends React.Component<GridProps> {
         display: 'flex',
         flexDirection: 'column',
     };
+
     public render(): React.ReactNode {
         const { className, style, children, spacing } = this.getProps();
 
-        LayoutUtil.validateChildrenType(children, x => x.isRow, 'Children type must be `Row`');
+        LayoutUtil.validateChildrenType(children, (x) => x.isRow, 'Children type must be `Row`');
 
         return (
             <div className={className} style={{ ...this.style, ...style }}>
