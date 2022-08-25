@@ -1,5 +1,3 @@
-import { maybe } from 'ts-maybe-monad';
-
 interface StyleKey {
     [key: string]: {
         isColor?: boolean;
@@ -26,6 +24,6 @@ export class StyleKeys {
     }
 
     public static isColor(key: string): boolean {
-        return maybe(StyleKeys.innerKeys[key], (x) => x.isColor, false);
+        return StyleKeys?.innerKeys[key]?.isColor||false;
     }
 }
