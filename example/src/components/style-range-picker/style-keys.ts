@@ -24,6 +24,6 @@ export class StyleKeys {
     }
 
     public static isColor(key: string): boolean {
-        return StyleKeys?.innerKeys[key]?.isColor||false;
+        return StyleKeys.innerKeys[key]?.isColor||false;
     }
 }
