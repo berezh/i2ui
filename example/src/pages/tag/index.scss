@@ -1,10 +1,9 @@
 .tag-page {
+  flex: 1;
+  display: block;
+  flex-direction: column;
+
+  > div {
     flex: 1;
-    display: block;
-    flex-direction: column;
-    > div {
-        flex: 1;
-        > div {
-        }
-    }
+  }
 }

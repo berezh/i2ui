@@ -1,75 +1,86 @@
-// https://blueprintjs.com/docs/#core/variables
+@import "../../../node_modules/@blueprintjs/core/src/blueprint";
 
+/* @import '../../../node_modules/@blueprintjs/icons/src/blueprint-icons.scss'; */
+@import "../../../node_modules/@blueprintjs/select/src/blueprint-select";
+
+// https://blueprintjs.com/docs/#core/variables
 .bp3-form-group {
+  position: relative;
+  margin-bottom: unset !important;
+  padding-bottom: 20px;
+
+  > label.bp3-label {
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  > .bp3-form-content {
     position: relative;
-    margin-bottom: unset !important;
-    padding-bottom: 20px;
-    > label.bp3-label {
-        margin-bottom: 3px;
-        font-weight: bold;
-        font-size: 12px;
+
+    > .bp3-form-helper-text {
+      margin-top: 2px;
+      color: #c57171;
+      position: absolute;
+      left: 0;
     }
-    > .bp3-form-content {
-        position: relative;
-        > .bp3-form-helper-text {
-            margin-top: 2px;
-            color: #c57171;
-            position: absolute;
-            left: 0;
-        }
-    }
+  }
 }
 
 .bp3-checkbox {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .bp3-popover-wrapper {
+  width: 100%;
+
+  > .bp3-popover-target {
     width: 100%;
-    > .bp3-popover-target {
+
+    > div {
+      width: 100%;
+
+      > button.bp3-button {
         width: 100%;
-        > div {
-            width: 100%;
-            > button.bp3-button {
-                width: 100%;
-                display: flex;
-                > span {
-                    &.bp3-button-text {
-                        flex: 1;
-                    }
-                    // &.bp3-icon {
-                    // }
-                }
-            }
+        display: flex;
+
+        > span {
+          &.bp3-button-text {
+            flex: 1;
+          }
+
+          // &.bp3-icon {
+          // }
         }
+      }
     }
+  }
 }
 
 .bp3-numeric-input {
-    display: flex;
-    > .bp3-input-group {
-        flex: 1;
-    }
-    > .bp3-button-group {
-        flex: 0;
-    }
+  display: flex;
+
+  > .bp3-input-group {
+    flex: 1;
+  }
+
+  > .bp3-button-group {
+    flex: 0;
+  }
 }
 
 button {
-    &.bp3-button[type='submit'],
-    &.bp3-button.darkness {
-        font-size: 16px;
-        color: #fff;
-        background-color: #644a77;
-        background-image: linear-gradient(#593f68, #452d53);
-        border-color: #573d69;
-        &:active,
-        &:disabled {
-            background-color: #644a77;
-        }
-    }
-}
+  &.bp3-button[type="submit"],
+  &.bp3-button.darkness {
+    font-size: 16px;
+    color: #fff;
+    background-color: #644a77;
+    background-image: linear-gradient(#593f68, #452d53);
+    border-color: #573d69;
 
-@import '../../../node_modules/@blueprintjs/core/src/blueprint.scss';
-/* @import '../../../node_modules/@blueprintjs/icons/src/blueprint-icons.scss'; */
-@import '../../../node_modules/@blueprintjs/select/src/blueprint-select.scss';
+    &:active,
+    &:disabled {
+      background-color: #644a77;
+    }
+  }
+}

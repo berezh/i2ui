@@ -1,36 +1,41 @@
 $width: 220px;
 
 .tag-cloud-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &__action {
+    padding: 0 0 10px;
+
+    > button {
+      margin-right: 10px;
+    }
+  }
+
+  &__container {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    &__action {
-        padding: 0 0 10px 0;
-        > button {
-            margin-right: 10px;
-        }
+    flex-flow: row wrap;
+  }
+
+  &__item {
+    display: flex;
+    flex: 1;
+    min-width: $width;
+    max-width: $width;
+    padding: 5px 10px 5px 0;
+
+    > div {
+      flex: 1;
+
+      &:nth-child(2) {
+        flex: 0 0 80px;
+      }
+
+      &:nth-child(3) {
+        flex: 0;
+      }
     }
-    &__container {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    &__item {
-        display: flex;
-        flex: 1;
-        min-width: $width;
-        max-width: $width;
-        padding: 5px 10px 5px 0;
-        padding: 5px 10px 5px 0;
-        > div {
-            flex: 1;
-            &:nth-child(2) {
-                flex: 0 0 80px;
-            }
-            &:nth-child(3) {
-                flex: 0;
-            }
-        }
-    }
+  }
 }
