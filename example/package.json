@@ -5,6 +5,7 @@
     "dependencies": {
         "@blueprintjs/core": "^4.9.2",
         "@blueprintjs/docs-theme": "^3.11.1",
+        "@blueprintjs/select": "^4.6.3",
         "emphasizer": "^1.4.3",
         "numeral": "^2.0.6",
         "react": "^16.8.6",

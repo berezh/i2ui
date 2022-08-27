@@ -26,7 +26,7 @@ export const OptionSelect: React.FC<Props> = (props) => {
                 active={modifiers.active}
                 disabled={option.disabled}
                 key={option.value}
-                onClick={handleClick}
+                onClick={handleClick as any}
                 text={option.name}
             />
         );
