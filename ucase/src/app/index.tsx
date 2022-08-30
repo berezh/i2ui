@@ -3,7 +3,5 @@ import './index.scss';
 import { Root } from './routes';
 
 export function App() {
-  return (    
-    <Root />
-  );
+  return <Root />;
 }

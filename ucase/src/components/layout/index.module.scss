@@ -1,3 +1,25 @@
+@import "~estyle/index";
+
+$spacing: 10px;
+
 .root {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+
+  @include row-space($spacing);
+}
+
+.menu {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  padding-right: $spacing;
+
+  @include col-space(5px);
+}
+
+.content {
+  flex: 1;
 }

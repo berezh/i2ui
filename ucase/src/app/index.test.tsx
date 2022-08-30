@@ -1,7 +1,8 @@
+/* eslint-disable testing-library/prefer-screen-queries */
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import {App} from '.';
+import { App } from '.';
 import { store } from '../redux/store';
 
 test('renders learn react link', () => {

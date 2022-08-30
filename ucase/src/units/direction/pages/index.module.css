@@ -1,0 +1,18 @@
+.root{
+  min-height: 100vh;
+  background-color: rgb(245, 245, 245);
+  position: relative;
+}
+
+.position{
+  position:absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.object{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: bisque;
+}
