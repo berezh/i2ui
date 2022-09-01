@@ -28,9 +28,9 @@ export function DirectionPage() {
     }
   }, [objectRef, position]);
 
-  const mouseStyle = useMemo<React.CSSProperties>(()=>{
-    return position? {top: position.y+10, left: position.x+10}:{display:'none'};
-  }, [position])
+  const mouseStyle = useMemo<React.CSSProperties>(() => {
+    return position ? { top: position.y + 10, left: position.x + 10 } : { display: 'none' };
+  }, [position]);
 
   return (
     <Layout onMouseMove={handleMouse} hideMenu={true}>
@@ -38,7 +38,11 @@ export function DirectionPage() {
         <div ref={objectRef} className={s.object}>
           {distance}
         </div>
-        <div className={s.mouse} style={mouseStyle}>{`X:${position.x} Y:${position.y}`}<br/>{`S:`}</div>
+        <div className={s.mouse} style={mouseStyle}>
+          {`X:${position.x} Y:${position.y}`}
+          <br />
+          {`S:`}
+        </div>
       </div>
     </Layout>
   );
