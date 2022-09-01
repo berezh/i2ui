@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, useState, useRef, useEffect } from 'react';
+import React, { MouseEvent, useCallback, useState, useRef, useEffect, useMemo } from 'react';
 import { Layout } from '../../../components/layout';
 
 import s from './index.module.css';
@@ -28,13 +28,17 @@ export function DirectionPage() {
     }
   }, [objectRef, position]);
 
+  const mouseStyle = useMemo<React.CSSProperties>(()=>{
+    return position? {top: position.y+10, left: position.x+10}:{display:'none'};
+  }, [position])
+
   return (
-    <Layout onMouseMove={handleMouse}>
+    <Layout onMouseMove={handleMouse} hideMenu={true}>
       <div className={s.root}>
         <div ref={objectRef} className={s.object}>
           {distance}
         </div>
-        <div className={s.position}>{`X:${position.x} Y:${position.y}`}</div>
+        <div className={s.mouse} style={mouseStyle}>{`X:${position.x} Y:${position.y}`}<br/>{`S:`}</div>
       </div>
     </Layout>
   );

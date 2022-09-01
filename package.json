@@ -49,7 +49,7 @@
         "build": "rollup -c",
         "build-watch": "rollup -c -w",
         "install-all": "npm i && cd example && npm i",
-        "start-e": "cd sample && npm start",
+        "start-u": "cd ucase && npm start",
         "build-e": "npm run build && cd sample && npm run build",
         "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
         "test": "jest",
