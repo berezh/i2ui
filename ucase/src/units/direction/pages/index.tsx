@@ -1,19 +1,13 @@
-import React, { MouseEvent, useCallback, useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Layout } from '../../../components/layout';
+import { useMouse } from '../../../components/mouse-provider';
+import { MouseTip } from '../components/mouse-tip';
 
 import s from './index.module.css';
 
-interface CursorPosition {
-  x: number;
-  y: number;
-}
-
 export function DirectionPage() {
-  const [position, setPosition] = useState<CursorPosition>({ x: 0, y: 0 });
   const [distance, setDistance] = useState(0);
-  const handleMouse = useCallback(({ pageX, pageY }: MouseEvent<HTMLDivElement>) => {
-    setPosition({ x: pageX, y: pageY });
-  }, []);
+  const position = useMouse();
 
   const objectRef = useRef<HTMLDivElement>(null);
 
@@ -28,21 +22,13 @@ export function DirectionPage() {
     }
   }, [objectRef, position]);
 
-  const mouseStyle = useMemo<React.CSSProperties>(() => {
-    return position ? { top: position.y + 10, left: position.x + 10 } : { display: 'none' };
-  }, [position]);
-
   return (
-    <Layout onMouseMove={handleMouse} hideMenu={true}>
+    <Layout hideMenu={true}>
       <div className={s.root}>
         <div ref={objectRef} className={s.object}>
           {distance}
         </div>
-        <div className={s.mouse} style={mouseStyle}>
-          {`X:${position.x} Y:${position.y}`}
-          <br />
-          {`S:`}
-        </div>
+        <MouseTip />
       </div>
     </Layout>
   );
