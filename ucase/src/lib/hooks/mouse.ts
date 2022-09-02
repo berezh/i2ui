@@ -27,14 +27,14 @@ export function useMouseMeta(elementNode: HTMLElement|null): MouseElementMeta {
   const prev = useDebounce({
     mouse,
     element
-  }, 200);
+  }, 500);
 
   const distance = getDistance(mouse, element);
   
   const ratio = useMemo(()=>{
     const prevDistance = getDistance(prev.mouse, prev.element);
     const mousePassed = getDistance(mouse, prev.mouse);
-    const distanceDelta = distance - prevDistance;
+    const distanceDelta = prevDistance - distance;
 
     return mousePassed>0? distanceDelta / mousePassed: 0;
   }, [prev, mouse, element, distance]);
