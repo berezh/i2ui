@@ -11,7 +11,8 @@ export function DirectionContent() {
   return (    
       <div className={s.root}>
         <div ref={objectRef} className={s.object}>
-          {meta?.distance}
+          {meta?.distance}<br/>
+          {meta?.ratio}
         </div>
         <MouseTip />
       </div>

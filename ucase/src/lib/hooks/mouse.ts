@@ -1,21 +1,43 @@
-import { RefObject, useMemo, useState } from 'react';
-import { useMouse } from '../../components/mouse-provider';
+import { useMemo } from 'react';
+import { Point, useMouse } from '../../components/mouse-provider';
+import { useDebounce } from './general';
 
 export interface MouseElementMeta {
   distance: number;
+  ratio:number;
 }
 
-export function useMouseMeta(element: HTMLElement|null): MouseElementMeta {
-  const position = useMouse();
-  return useMemo<MouseElementMeta>(()=>{
-    if (element) {
-      const { x, y, width, height } = element.getBoundingClientRect();
-      const oX = Math.floor(x + width / 2);
-      const oY = Math.floor(y + height / 2);
-  
-      const d = Math.sqrt(Math.abs(Math.pow(position.x - oX, 2) + Math.pow(position.y - oY, 2)));
-      return { distance: Math.floor(d) };
+function getDistance(mouse: Point, element: Point){  
+  return Math.floor(Math.sqrt(Math.abs(Math.pow(mouse.x - element.x, 2) + Math.pow(mouse.y - element.y, 2))));
+}
+
+export function useMouseMeta(elementNode: HTMLElement|null): MouseElementMeta {
+  const mouse = useMouse();
+  const element = useMemo<Point>(()=>{
+    if (elementNode) {
+      const {x, y, width, height} =  elementNode.getBoundingClientRect();
+      return {
+        x: Math.floor(x + width / 2),
+        y: Math.floor(y + height / 2)
+      }
     }
-    return {distance: 0};
-  }, [element, position]);
+    return {x: 0, y: 0};
+  }, [elementNode, mouse]);
+
+  const prev = useDebounce({
+    mouse,
+    element
+  }, 200);
+
+  const distance = getDistance(mouse, element);
+  
+  const ratio = useMemo(()=>{
+    const prevDistance = getDistance(prev.mouse, prev.element);
+    const mousePassed = getDistance(mouse, prev.mouse);
+    const distanceDelta = distance - prevDistance;
+
+    return mousePassed>0? distanceDelta / mousePassed: 0;
+  }, [prev, mouse, element, distance]);
+
+  return {distance, ratio};
 }
