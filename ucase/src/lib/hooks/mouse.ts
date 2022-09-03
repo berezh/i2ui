@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Point, useMouse } from '../../components/mouse-provider';
+import { Point, useMousePosition } from '../../components/mouse-provider';
 import { useDebounce } from './general';
 
 export interface MouseElementMeta {
@@ -12,7 +12,7 @@ function getDistance(mouse: Point, element: Point){
 }
 
 export function useMouseMeta(elementNode: HTMLElement|null): MouseElementMeta {
-  const mouse = useMouse();
+  const mouse = useMousePosition();
   const element = useMemo<Point>(()=>{
     if (elementNode) {
       const {x, y, width, height} =  elementNode.getBoundingClientRect();

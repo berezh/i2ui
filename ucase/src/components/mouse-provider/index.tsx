@@ -1,4 +1,5 @@
 import React, { useEffect, createContext, useContext, useState, useCallback, MouseEvent, useLayoutEffect } from 'react';
+import s from './index.module.scss';
 
 export interface Point {
   x: number;
@@ -17,7 +18,7 @@ interface Props {
 
 const POSITION_DEFAULT: Point = {x: 0, y: 0};
 
-export const MouseProvider: React.FC<Props> = ({ children, className }) => {
+export const MousePositionProvider: React.FC<Props> = ({ children, className }) => {
   const [position, setPosition] = useState<Point>(POSITION_DEFAULT);
 
   const handleMouse = useCallback((e: MouseEvent) => {
@@ -25,18 +26,9 @@ export const MouseProvider: React.FC<Props> = ({ children, className }) => {
     setPosition({ x: pageX, y: pageY });
   }, []);
 
-  // useEffect(() => {
-  //   if (window) {
-  //     window.document.body.addEventListener('mousemove', handleMouse as any);
-  //     return () => {
-  //       window.document.body.removeEventListener('mousemove', handleMouse as any);
-  //     };
-  //   }
-  // }, [handleMouse]);
-
-  return <ThemeContext.Provider value={position}><div className={className} onMouseMove={handleMouse}>{children}</div></ThemeContext.Provider>;
+  return <ThemeContext.Provider value={position}><div className={s.root} onMouseMove={handleMouse}>{children}</div></ThemeContext.Provider>;
 };
 
-export const useMouse = (): Point => {
+export const useMousePosition = (): Point => {
   return useContext(ThemeContext);
 };

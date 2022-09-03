@@ -1,5 +1,5 @@
 import React from 'react';
-import { MouseProvider } from '../components/mouse-provider';
+import { MousePositionProvider } from '../components/mouse-provider';
 import './index.scss';
 import { Root } from './routes';
 

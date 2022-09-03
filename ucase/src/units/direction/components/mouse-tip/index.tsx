@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { useMouse } from '../../../../components/mouse-provider';
+import { useMousePosition } from '../../../../components/mouse-provider';
 
 import s from './index.module.css';
 
@@ -9,7 +9,7 @@ export interface MousePosition {
 }
 
 export function MouseTip() {
-  const position = useMouse();
+  const position = useMousePosition();
 
 
   const mouseStyle = useMemo<React.CSSProperties>(() => {
@@ -19,8 +19,6 @@ export function MouseTip() {
   return ( 
     <div className={s.root} style={mouseStyle}>
       {`X:${position.x} Y:${position.y}`}
-      <br />
-      {`S:`}
     </div>
   );
 }
