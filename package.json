@@ -1,6 +1,6 @@
 {
     "name": "i2ui",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "i2ui - Intuitively Understantable User Interface",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -49,7 +49,7 @@
         "build": "rollup -c",
         "build-watch": "rollup -c -w",
         "install-all": "npm i && cd example && npm i",
-        "start-u": "cd ucase && npm start",
+        "start-e": "cd ucase && npm start",
         "build-e": "npm run build && cd sample && npm run build",
         "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
         "test": "jest",

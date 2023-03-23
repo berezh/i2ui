@@ -13,7 +13,7 @@ export interface SplitedNumberOptionsProps {
 
 export class NumberUtil {
   public static splitNumber(value: number, options: SplitedNumberOptionsProps): SplitedNumberGroupProps[] {
-    const { decimalDigits, groupSeparator, decimalSeparator, groupDigits } = options;
+    const { decimalDigits, groupSeparator = ',', decimalSeparator, groupDigits } = options;
 
     const result: SplitedNumberGroupProps[] = [];
 
@@ -24,7 +24,7 @@ export class NumberUtil {
       for (let i = 0; i < groups.length; i++) {
         result.push({
           text: groups[i],
-          separator: i > 0 ? groupSeparator || ',' : undefined,
+          separator: i > 0 ? (groupSeparator === undefined ? undefined : groupSeparator) : undefined,
         });
       }
 
