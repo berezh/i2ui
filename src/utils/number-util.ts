@@ -12,30 +12,41 @@ export interface SplitedNumberOptionsProps {
 }
 
 export class NumberUtil {
-  public static splitNumber(value: number, options: SplitedNumberOptionsProps): SplitedNumberGroupProps[] {
-    const { decimalDigits, groupSeparator = ',', decimalSeparator, groupDigits } = options;
+  public static toFloat(value: number | string | undefined): number | undefined {
+    if (typeof value === 'string') {
+      const tryNumberValue = parseFloat(value);
+      return value === tryNumberValue.toString() ? tryNumberValue : undefined;
+    }
 
+    return value;
+  }
+
+  public static splitNumber(value: number | undefined, options: SplitedNumberOptionsProps): SplitedNumberGroupProps[] {
     const result: SplitedNumberGroupProps[] = [];
 
-    const stringValue: string = value.toFixed(decimalDigits || 0);
-    const splits: string[] = stringValue.split('.');
-    if (splits.length > 0) {
-      const groups = NumberUtil.toGroups(splits[0], groupDigits);
-      for (let i = 0; i < groups.length; i++) {
-        result.push({
-          text: groups[i],
-          separator: i > 0 ? (groupSeparator === undefined ? undefined : groupSeparator) : undefined,
-        });
-      }
+    if (value !== undefined) {
+      const { decimalDigits, groupSeparator = ',', decimalSeparator, groupDigits } = options;
 
-      if (splits.length === 2) {
-        const fraction = splits[1];
-        if (fraction) {
+      const stringValue: string = value.toFixed(decimalDigits || 0);
+      const splits: string[] = stringValue.split('.');
+      if (splits.length > 0) {
+        const groups = NumberUtil.toGroups(splits[0], groupDigits);
+        for (let i = 0; i < groups.length; i++) {
           result.push({
-            text: fraction,
-            isFraction: true,
-            separator: decimalSeparator || '.',
+            text: groups[i],
+            separator: i > 0 ? (groupSeparator === undefined ? undefined : groupSeparator) : undefined,
           });
+        }
+
+        if (splits.length === 2) {
+          const fraction = splits[1];
+          if (fraction) {
+            result.push({
+              text: fraction,
+              isFraction: true,
+              separator: decimalSeparator || '.',
+            });
+          }
         }
       }
     }

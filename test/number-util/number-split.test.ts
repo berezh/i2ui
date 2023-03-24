@@ -2,7 +2,11 @@ import { NumberUtil, SplitedNumberOptionsProps, SplitedNumberGroupProps } from '
 
 const testSeparator = '|';
 
-function textSplitNumber(value: number, options: SplitedNumberOptionsProps, ...splits: SplitedNumberGroupProps[]) {
+function textSplitNumber(
+  value: number | undefined,
+  options: SplitedNumberOptionsProps,
+  ...splits: SplitedNumberGroupProps[]
+) {
   expect(NumberUtil.splitNumber(value, options)).toMatchObject<SplitedNumberGroupProps[]>(splits);
 }
 
@@ -23,12 +27,12 @@ describe('NumberUtil', () => {
     textSplitNumber(0.123, { decimalDigits: 1 }, { text: '0' }, { text: '1', separator: '.' });
   });
 
-  describe('splitNumber', () => {
-    it('groupSeparator default', () => {
+  describe('splitNumber.groupSeparator', () => {
+    it('default', () => {
       textSplitNumber(1234, { groupSeparator: undefined }, { text: '1' }, { text: '234', separator: ',' });
     });
 
-    it('groupSeparator custom', () => {
+    it('custom', () => {
       textSplitNumber(
         1234,
         { groupSeparator: testSeparator },
@@ -37,7 +41,7 @@ describe('NumberUtil', () => {
       );
     });
 
-    it('groupSeparator [empty]', () => {
+    it('[empty]', () => {
       textSplitNumber(1234, { groupSeparator: '' }, { text: '1' }, { text: '234', separator: '' });
     });
   });
@@ -49,5 +53,9 @@ describe('NumberUtil', () => {
       { text: '0' },
       { text: '1', separator: testSeparator }
     );
+  });
+
+  it('splitNumber undefined', () => {
+    textSplitNumber(undefined, { decimalDigits: 1, decimalSeparator: testSeparator });
   });
 });
