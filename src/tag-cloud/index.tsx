@@ -1,46 +1,57 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { emphasizeStyle } from "emphasizer";
 
-import { TagUtil } from "../utils";
+import { NumberUtil, TagUtil } from "../utils";
 
 export type TagCloudOrder = "none" | "desc" | "middle" | "asc" | "edge";
 
 export interface TagCloudProps {
   className?: string;
   style?: React.CSSProperties;
-  data: TagProps[];
+  data: any[];
   fromStyle: React.CSSProperties;
   toStyle: React.CSSProperties;
   order?: TagCloudOrder;
-  renderOption?: (option: TagProps, style: React.CSSProperties) => React.ReactElement;
+  render?: (style: React.CSSProperties, record: any, index: number) => React.ReactElement;
+  valueDataIndex?: string;
 }
 
-export interface TagProps {
-  text: string;
-  rate: number;
-}
+export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, valueDataIndex = "value" }) => {
+  const handleParseValue = useCallback(
+    (record: any) => {
+      return NumberUtil.toFloat(record[valueDataIndex]) || 0;
+    },
+    [valueDataIndex]
+  );
 
-export const TagCloud: React.FC<TagCloudProps> = ({ data: data, fromStyle, toStyle, order, className, style, renderOption }) => {
-  const rates: number[] = data.map(x => x.rate);
-  const min: number = Math.min(...rates);
-  const max: number = Math.max(...rates);
+  const [min, max] = useMemo(() => {
+    const rates = data.map(x => handleParseValue(x));
+    const minV: number = Math.min(...rates);
+    const maxV: number = Math.max(...rates);
+    return [minV, maxV];
+  }, [data, handleParseValue]);
 
-  const orderData: TagProps[] = TagUtil.order(data, order);
+  const orderData = useMemo(() => {
+    return TagUtil.order(data, order, handleParseValue);
+  }, [data, order, handleParseValue]);
 
-  const rootStyle: React.CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyItems: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-  };
+  const rootStyle = useMemo<React.CSSProperties>(() => {
+    return {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyItems: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      alignContent: "center",
+      ...style,
+    };
+  }, [style]);
 
   return (
-    <div className={className} style={{ ...rootStyle, ...style }}>
-      {orderData.map((x, i) => {
-        const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, x.rate);
-        return <React.Fragment key={i}>{renderOption ? renderOption(x, optionStyle) : <div style={optionStyle}>{x.text}</div>}</React.Fragment>;
+    <div className={className} style={rootStyle}>
+      {orderData.map((record, i) => {
+        const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, record.rate);
+        return <React.Fragment key={i}>{render ? render(optionStyle, record, i) : <div style={optionStyle}>{record.text}</div>}</React.Fragment>;
       })}
     </div>
   );

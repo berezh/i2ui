@@ -1,19 +1,19 @@
-import { TagProps, TagCloudOrder } from "..";
+import { TagCloudOrder } from "..";
 
 export class TagUtil {
-  public static order(data: TagProps[], order?: TagCloudOrder): TagProps[] {
+  public static order(data: any[], order: TagCloudOrder, parse: (record: any) => number): any[] {
     if (order === "desc" || order === "middle") {
-      let result: TagProps[] = data.sort((a, b) => {
-        if (a.rate > b.rate) {
+      let result: any[] = data.sort((a, b) => {
+        if (parse(a) > parse(b)) {
           return -1;
-        } else if (a.rate < b.rate) {
+        } else if (parse(a) < parse(b)) {
           return 1;
         }
         return 0;
       });
 
       if (order === "middle") {
-        const temp: TagProps[] = [];
+        const temp: any[] = [];
         result.forEach((x, i) => {
           if (i % 2 === 0) {
             temp.push(x);
@@ -26,17 +26,17 @@ export class TagUtil {
 
       return result;
     } else if (order === "asc" || order === "edge") {
-      let result: TagProps[] = data.sort((a, b) => {
-        if (a.rate < b.rate) {
+      let result: any[] = data.sort((a, b) => {
+        if (parse(a) < parse(b)) {
           return -1;
-        } else if (a.rate > b.rate) {
+        } else if (parse(a) > parse(b)) {
           return 1;
         }
         return 0;
       });
 
       if (order === "edge") {
-        const temp: TagProps[] = [];
+        const temp: any[] = [];
         result.forEach((x, i) => {
           if (i % 2 === 0) {
             temp.push(x);
