@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react';
-import { NumberUtil, SplitedNumberGroupProps, SplitedNumberOptionsProps } from '../utils/number-util';
-import { emphasizeStyle } from 'emphasizer';
+import React, { useMemo } from "react";
+import { emphasizeStyle } from "emphasizer";
 
-export type I2NumberVerticalAlignProps = 'top' | 'center' | 'bottom';
+import { NumberUtil, SplitedNumberGroupProps, SplitedNumberOptionsProps } from "../utils/number-util";
+
+export type I2NumberVerticalAlign = "top" | "center" | "bottom";
 
 export interface I2NumberProps {
   fromStyle?: React.CSSProperties;
   toStyle?: React.CSSProperties;
-  verticalAlign?: I2NumberVerticalAlignProps;
+  verticalAlign?: I2NumberVerticalAlign;
   decimalDigits?: number;
   groupDigits?: number;
   groupSeparator?: string;
@@ -20,17 +21,17 @@ export interface I2NumberProps {
 }
 
 const rootStyle: React.CSSProperties = {
-  display: 'inline-block',
+  display: "inline-block",
 };
 
 const defaultContentStyle: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'flex-end',
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "flex-end",
 };
 
 const numberPartStyle: React.CSSProperties = {
-  lineHeight: '1em',
+  lineHeight: "1em",
 };
 
 export const I2Number: React.FC<I2NumberProps> = ({
@@ -66,24 +67,24 @@ export const I2Number: React.FC<I2NumberProps> = ({
 
   const from = useMemo<React.CSSProperties>(() => {
     return {
-      fontSize: '1em',
+      fontSize: "1em",
       ...fromStyle,
     };
   }, [fromStyle]);
 
   const to = useMemo<React.CSSProperties>(() => {
     return {
-      fontSize: '2em',
+      fontSize: "2em",
       ...toStyle,
     };
   }, [toStyle]);
 
   const contentStyle = useMemo<React.CSSProperties>(() => {
     const result = { ...defaultContentStyle };
-    if (align === 'top') {
-      result.alignItems = 'flex-start';
-    } else if (align === 'center') {
-      result.alignItems = 'center';
+    if (align === "top") {
+      result.alignItems = "flex-start";
+    } else if (align === "center") {
+      result.alignItems = "center";
     }
     return result;
   }, [align]);
@@ -93,11 +94,7 @@ export const I2Number: React.FC<I2NumberProps> = ({
       <div style={contentStyle}>
         {splits.map(({ text, separator }, i) => {
           const maxRate: number = basicSplits.length;
-          return (
-            <div key={i} style={{ ...emphasizeStyle(from, to, 1, maxRate, splits.length - i), ...numberPartStyle }}>{`${
-              separator || ''
-            }${text}`}</div>
-          );
+          return <div key={i} style={{ ...emphasizeStyle(from, to, 1, maxRate, splits.length - i), ...numberPartStyle }}>{`${separator || ""}${text}`}</div>;
         })}
       </div>
     </div>

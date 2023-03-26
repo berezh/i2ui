@@ -13,7 +13,7 @@ export interface SplitedNumberOptionsProps {
 
 export class NumberUtil {
   public static toFloat(value: number | string | undefined): number | undefined {
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       const tryNumberValue = parseFloat(value);
       return value === tryNumberValue.toString() ? tryNumberValue : undefined;
     }
@@ -25,10 +25,10 @@ export class NumberUtil {
     const result: SplitedNumberGroupProps[] = [];
 
     if (value !== undefined) {
-      const { decimalDigits, groupSeparator = ',', decimalSeparator, groupDigits } = options;
+      const { decimalDigits, groupSeparator = ",", decimalSeparator, groupDigits } = options;
 
       const stringValue: string = value.toFixed(decimalDigits || 0);
-      const splits: string[] = stringValue.split('.');
+      const splits: string[] = stringValue.split(".");
       if (splits.length > 0) {
         const groups = NumberUtil.toGroups(splits[0], groupDigits);
         for (let i = 0; i < groups.length; i++) {
@@ -44,7 +44,7 @@ export class NumberUtil {
             result.push({
               text: fraction,
               isFraction: true,
-              separator: decimalSeparator || '.',
+              separator: decimalSeparator || ".",
             });
           }
         }
@@ -59,9 +59,7 @@ export class NumberUtil {
       return [integer];
     }
     const digits = Math.abs(groupDigits || 3);
-    const output: RegExpMatchArray | null = integer.match(
-      new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, 'g')
-    );
+    const output: RegExpMatchArray | null = integer.match(new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, "g"));
     // integer.match(/(\d+?)(?=(\d{3})+(?!\d)|$)/g);
     return output ? output : [];
   }

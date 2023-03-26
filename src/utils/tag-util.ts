@@ -1,8 +1,8 @@
-import { TagProps, TagCloudOrder } from '..';
+import { TagProps, TagCloudOrder } from "..";
 
 export class TagUtil {
   public static order(data: TagProps[], order?: TagCloudOrder): TagProps[] {
-    if (order === 'desc' || order === 'middle') {
+    if (order === "desc" || order === "middle") {
       let result: TagProps[] = data.sort((a, b) => {
         if (a.rate > b.rate) {
           return -1;
@@ -12,7 +12,7 @@ export class TagUtil {
         return 0;
       });
 
-      if (order === 'middle') {
+      if (order === "middle") {
         const temp: TagProps[] = [];
         result.forEach((x, i) => {
           if (i % 2 === 0) {
@@ -25,7 +25,7 @@ export class TagUtil {
       }
 
       return result;
-    } else if (order === 'asc' || order === 'edge') {
+    } else if (order === "asc" || order === "edge") {
       let result: TagProps[] = data.sort((a, b) => {
         if (a.rate < b.rate) {
           return -1;
@@ -35,7 +35,7 @@ export class TagUtil {
         return 0;
       });
 
-      if (order === 'edge') {
+      if (order === "edge") {
         const temp: TagProps[] = [];
         result.forEach((x, i) => {
           if (i % 2 === 0) {
