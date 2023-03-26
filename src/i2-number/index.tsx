@@ -86,7 +86,7 @@ export const I2Number: React.FC<I2NumberProps> = ({
       result.alignItems = 'center';
     }
     return result;
-  }, []);
+  }, [align]);
 
   return (
     <div className={className} style={{ ...rootStyle, ...style }}>
