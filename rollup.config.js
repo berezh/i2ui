@@ -30,20 +30,25 @@ if (process.env.BUILD === "production") {
 //     },
 // }),
 
+const output = [];
+if (process.env.BUILD === "dev") {
+  output.push({
+    file: "../i2ui-site/node_modules/i2ui/dist/index.js",
+    // file: "example/src/i2ui/index.js",
+    format: "cjs",
+    banner: "/* eslint-disable */",
+  });
+} else {
+  output.push({ file: pkg.main, format: "cjs" });
+  output.push({ file: pkg.module, format: "esm" });
+}
+
 export default [
   {
     input: "src/index.ts",
     dest: "index.js",
     external: Object.keys(pkg.peerDependencies || {}),
     plugins,
-    output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "esm" },
-      {
-        file: "example/src/i2ui/index.js",
-        format: "es",
-        banner: "/* eslint-disable */",
-      },
-    ],
+    output,
   },
 ];

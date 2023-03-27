@@ -13,6 +13,6 @@
         "target": "es5",
         "jsx": "react"
     },
-    "include": ["src/**/*", "test/test", "tests"],
+    "include": ["src/**/*", "test/test", "tests", "test/grid-manager.test.ts"],
     "exclude": ["node_modules"]
 }
