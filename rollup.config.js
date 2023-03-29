@@ -1,19 +1,11 @@
 /* eslint-disable import/no-default-export */
-import typescript from "rollup-plugin-typescript2";
-import scss from "rollup-plugin-scss";
 import { uglify } from "rollup-plugin-uglify";
+import typescript from "@rollup/plugin-typescript";
 
 import pkg from "./package.json";
 // import fs from 'fs';
 
-const plugins = [
-  typescript({
-    typescript: require("typescript"),
-  }),
-  scss({
-    output: false,
-  }),
-];
+const plugins = [typescript()];
 
 if (process.env.BUILD === "production") {
   plugins.push(

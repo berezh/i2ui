@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "declaration": true,
-        "declarationDir": "./dist",
         "strict": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
@@ -11,8 +10,8 @@
         "noImplicitAny": true,
         "outDir": "./dist",
         "target": "es5",
-        "jsx": "react"
+        "jsx": "react",
     },
-    "include": ["src/**/*", "test/test", "tests"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules"]
 }
