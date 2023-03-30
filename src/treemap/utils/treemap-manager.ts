@@ -10,6 +10,11 @@ export interface TmNode {
   children: TmNode[];
 }
 
+interface RateOption {
+  __rate: number;
+  [key: string]: any;
+}
+
 const SPLIT_RATIO = 0.5;
 
 export class TreemapManager {
@@ -63,11 +68,14 @@ export class TreemapManager {
 
   public refresh() {
     const options = this._data
-      .map(x => {
-        return { ...x };
+      .map<RateOption>(x => {
+        return { ...x, __rate: this.getRecordRate(x) };
+      })
+      .filter(x => {
+        return x.__rate > 0;
       })
       .sort((a, b) => {
-        return this.getRecordRate(b) - this.getRecordRate(a);
+        return b.__rate - a.__rate;
       });
 
     const rootRectangle: GridCardRect = {
@@ -76,7 +84,7 @@ export class TreemapManager {
       width: this._rows,
       height: this._cols,
     };
-    const rootRate = options.reduce((sum, x) => sum + this.getRecordRate(x), 0);
+    const rootRate = options.reduce((sum, x) => sum + x.__rate, 0);
     this.rootNode = this.initNode(options, rootRectangle, rootRate, this._cols * this._rows);
     this._cards = [];
     this.initCard(this.rootNode, this._cards);
@@ -84,7 +92,7 @@ export class TreemapManager {
 
   private initNode(options: any[], rect: GridCardRect, rootRate: number, rootSquare: number): TmNode {
     this._count++;
-    const nodeRate = options.reduce((sum, x) => sum + this.getRecordRate(x), 0);
+    const nodeRate = options.reduce((sum, x) => sum + x.__rate, 0);
     const children: TmNode[] = [];
     let record: any | undefined = undefined;
 
@@ -94,15 +102,15 @@ export class TreemapManager {
     if (options.length === 2) {
       const o1 = options[0];
       const o2 = options[1];
-      const [r1, r2] = GridRectUtil.split(rect, this.getRecordRate(o1), this.getRecordRate(o2));
-      children.push({ rate: this.getRecordRate(o1), rootRate, rootSquare, rect: r1, record: o1, children: [] });
-      children.push({ rate: this.getRecordRate(o2), rootRate, rootSquare, rect: r2, record: o2, children: [] });
+      const [r1, r2] = GridRectUtil.split(rect, o1.__rate, o2.__rate);
+      children.push({ rate: o1.__rate, rootRate, rootSquare, rect: r1, record: o1, children: [] });
+      children.push({ rate: o2.__rate, rootRate, rootSquare, rect: r2, record: o2, children: [] });
     } else if (options.length > 2) {
       let splitRate = 0;
       let halfIndex = 0;
       for (const option of options) {
         halfIndex++;
-        splitRate += this.getRecordRate(option);
+        splitRate += option.__rate;
         if (splitRate >= nodeRate * SPLIT_RATIO) {
           break;
         }

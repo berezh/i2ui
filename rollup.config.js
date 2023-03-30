@@ -25,7 +25,7 @@ if (process.env.BUILD === "production") {
 const output = [];
 if (process.env.BUILD === "dev") {
   output.push({
-    file: "../i2ui-site/node_modules/i2ui/dist/index.js",
+    file: "../i2ui-site/src/i2ui/dist/index.js",
     format: "cjs",
     banner: "/* eslint-disable */",
   });

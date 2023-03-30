@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { GridCardInfo, GridCellMeta } from "./utils/interface";
 import { TreemapManager } from "./utils/treemap-manager";
@@ -28,6 +28,10 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
     manager.init(rows, cols, data, valueDataIndex);
     return manager.cards;
   }, [rows, cols, data, valueDataIndex]);
+
+  useEffect(() => {
+    console.info("TREEMAP", className, rows, cols, gap, valueDataIndex, data.length);
+  }, [className, rows, cols, gap, valueDataIndex, data]);
 
   return (
     <div style={rootStyle} className={className}>
