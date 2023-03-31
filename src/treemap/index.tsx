@@ -8,12 +8,13 @@ interface Props {
   rows?: number;
   cols?: number;
   gap?: number;
-  valueDataIndex?: string;
+  dataValueKey?: string;
   data: any[];
+  baseRate?: number;
   render: (style: React.CSSProperties, record: any, index: number, rect: GridCellMeta) => React.ReactNode;
 }
 
-export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, valueDataIndex = "value", render: renderCell, data }) => {
+export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render: renderCell, data, baseRate }) => {
   const rootStyle = useMemo<React.CSSProperties>(() => {
     return {
       display: "grid",
@@ -25,13 +26,13 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
 
   const cells = useMemo<GridCardInfo[]>(() => {
     const manager = new TreemapManager();
-    manager.init(rows, cols, data, valueDataIndex);
+    manager.init(rows, cols, data, dataValueKey, baseRate);
     return manager.cards;
-  }, [rows, cols, data, valueDataIndex]);
+  }, [rows, cols, data, dataValueKey, baseRate]);
 
   useEffect(() => {
-    console.info("TREEMAP", className, rows, cols, gap, valueDataIndex, data.length);
-  }, [className, rows, cols, gap, valueDataIndex, data]);
+    console.info("TREEMAP", className, rows, cols, gap, dataValueKey, data.length, "baseRate", baseRate);
+  }, [className, rows, cols, gap, dataValueKey, data, baseRate]);
 
   return (
     <div style={rootStyle} className={className}>

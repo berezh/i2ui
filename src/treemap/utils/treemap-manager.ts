@@ -26,6 +26,8 @@ export class TreemapManager {
 
   private _rows = 0;
 
+  private _baseRate = 0;
+
   private _cards: GridCardInfo[] = [];
 
   private _valueDataIndex = "";
@@ -43,12 +45,13 @@ export class TreemapManager {
     return this._cards;
   }
 
-  public init(cols: number, rows: number, data: any[], valueDataIndex = "rate") {
+  public init(cols: number, rows: number, data: any[], valueDataIndex = "rate", baseRate = 0) {
     this._count = 0;
     this._cols = cols;
     this._rows = rows;
     this._data = data;
     this._valueDataIndex = valueDataIndex;
+    this._baseRate = baseRate;
     this.refresh();
   }
 
@@ -69,7 +72,7 @@ export class TreemapManager {
   public refresh() {
     const options = this._data
       .map<RateOption>(x => {
-        return { ...x, __rate: this.getRecordRate(x) };
+        return { ...x, __rate: this.getRecordRate(x) + this._baseRate };
       })
       .filter(x => {
         return x.__rate > 0;

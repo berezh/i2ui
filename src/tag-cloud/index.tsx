@@ -13,15 +13,15 @@ export interface TagCloudProps {
   toStyle: React.CSSProperties;
   order?: TagCloudOrder;
   render?: (style: React.CSSProperties, record: any, index: number) => React.ReactElement;
-  valueDataIndex?: string;
+  dataValueKey?: string;
 }
 
-export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, valueDataIndex = "value" }) => {
+export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, dataValueKey = "value" }) => {
   const handleParseValue = useCallback(
     (record: any) => {
-      return NumberUtil.toFloat(record[valueDataIndex]) || 0;
+      return NumberUtil.toFloat(record[dataValueKey]) || 0;
     },
-    [valueDataIndex]
+    [dataValueKey]
   );
 
   const [min, max] = useMemo(() => {
