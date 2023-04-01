@@ -1,38 +1,9 @@
-import React, { useEffect, useMemo } from "react";
-import { emphasizeStyle } from "emphasizer";
+import React, { useMemo } from "react";
 
-import { NumberUtil, I2NumberSplitGroup, I2NumberSplitOptions } from "../utils/number-util";
+import { I2NumberProps } from "../interfaces";
+import { parseI2Number } from "./parser";
 
-export type I2NumberVerticalAlign = "top" | "center" | "bottom";
-
-export interface I2NumberProps {
-  fromStyle?: React.CSSProperties;
-  toStyle?: React.CSSProperties;
-  verticalAlign?: I2NumberVerticalAlign;
-  decimalDigits?: number;
-  groupDigits?: number;
-  groupSeparator?: string;
-  decimalSeparator?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  basicMaxValue?: number | string;
-  value?: number | string;
-  children?: number | string;
-}
-
-const rootStyle: React.CSSProperties = {
-  display: "inline-block",
-};
-
-const defaultContentStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "flex-end",
-};
-
-const numberPartStyle: React.CSSProperties = {
-  lineHeight: "1em",
-};
+export * from "./parser";
 
 export const I2Number: React.FC<I2NumberProps> = ({
   fromStyle,
@@ -44,54 +15,17 @@ export const I2Number: React.FC<I2NumberProps> = ({
   groupSeparator,
   decimalSeparator,
   groupDigits,
-  value,
   basicMaxValue,
+  value,
   children,
 }) => {
-  const numberOptions = useMemo<I2NumberSplitOptions>(() => {
-    return {
-      decimalDigits,
-      decimalSeparator,
-      groupSeparator,
-      groupDigits,
-    };
-  }, [decimalDigits, decimalSeparator, groupSeparator, groupDigits]);
-
-  const currentValue = useMemo(() => {
-    return children || value;
-  }, [children, value]);
-
-  const splits = useMemo<I2NumberSplitGroup[]>(() => {
-    return NumberUtil.splitNumber(currentValue, numberOptions);
-  }, [currentValue, numberOptions]);
-
-  const basicSplits = useMemo<I2NumberSplitGroup[]>(() => {
-    return NumberUtil.splitNumber(basicMaxValue || currentValue, numberOptions);
-  }, [basicMaxValue, currentValue, numberOptions]);
-
-  const from = useMemo<React.CSSProperties>(() => {
-    return {
-      fontSize: "1em",
-      ...fromStyle,
-    };
-  }, [fromStyle]);
-
-  const to = useMemo<React.CSSProperties>(() => {
-    return {
-      fontSize: "2em",
-      ...toStyle,
-    };
-  }, [toStyle]);
-
   const parts = useMemo<{ style: React.CSSProperties; children: string }[]>(() => {
-    const maxRate: number = basicSplits.length;
-    return splits.map(({ text, separator }, i) => {
-      return { style: { ...emphasizeStyle(from, to, 1, maxRate, splits.length - i), ...numberPartStyle }, children: `${separator || ""}${text}` };
-    });
-  }, [from, to, splits, basicSplits]);
+    const currentValue = children || value;
+    return parseI2Number({ value: currentValue, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue });
+  }, [value, children, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue]);
 
   const contentStyle = useMemo<React.CSSProperties>(() => {
-    const result = { ...defaultContentStyle };
+    const result: React.CSSProperties = { display: "flex", flexDirection: "row", alignItems: "flex-end" };
     if (align === "top") {
       result.alignItems = "flex-start";
     } else if (align === "center") {
@@ -100,8 +34,12 @@ export const I2Number: React.FC<I2NumberProps> = ({
     return result;
   }, [align]);
 
+  const rootStyle = useMemo<React.CSSProperties>(() => {
+    return { display: "inline-block", ...style };
+  }, [style]);
+
   return (
-    <div className={className} style={{ ...rootStyle, ...style }}>
+    <div className={className} style={rootStyle}>
       <div style={contentStyle}>
         {parts.map(({ children, style }, i) => {
           return (

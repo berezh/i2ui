@@ -1,15 +1,4 @@
-export interface I2NumberSplitGroup {
-  text: string;
-  separator?: string;
-  isFraction?: boolean;
-}
-
-export interface I2NumberSplitOptions {
-  decimalDigits?: number;
-  groupSeparator?: string;
-  decimalSeparator?: string;
-  groupDigits?: number;
-}
+import { I2NumberSplitGroup, I2NumberSplitOptions } from "../interfaces";
 
 export class NumberUtil {
   public static toFloat(value: number | string | undefined): number | undefined {
@@ -21,6 +10,16 @@ export class NumberUtil {
     return value;
   }
 
+  public static toGroups(integer: string, groupDigits?: number): string[] {
+    if (groupDigits === 0) {
+      return [integer];
+    }
+    const digits = Math.abs(groupDigits || 3);
+    const output: RegExpMatchArray | null = integer.match(new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, "g"));
+    // integer.match(/(\d+?)(?=(\d{3})+(?!\d)|$)/g);
+    return output ? output : [];
+  }
+
   public static splitNumber(value: string | number | undefined, options: I2NumberSplitOptions): I2NumberSplitGroup[] {
     const result: I2NumberSplitGroup[] = [];
 
@@ -28,7 +27,6 @@ export class NumberUtil {
 
     if (numberValue !== undefined) {
       const { decimalDigits, groupSeparator = ",", decimalSeparator, groupDigits } = options;
-
       const stringValue: string = numberValue.toFixed(decimalDigits || 0);
       const splits: string[] = stringValue.split(".");
       if (splits.length > 0) {
@@ -56,13 +54,11 @@ export class NumberUtil {
     return result;
   }
 
-  public static toGroups(integer: string, groupDigits?: number): string[] {
-    if (groupDigits === 0) {
-      return [integer];
-    }
-    const digits = Math.abs(groupDigits || 3);
-    const output: RegExpMatchArray | null = integer.match(new RegExp(`(\\d\+\?)(\?\=(\\d{${digits}})\+(\?\!\\d)\|\$)`, "g"));
-    // integer.match(/(\d+?)(?=(\d{3})+(?!\d)|$)/g);
-    return output ? output : [];
+  public static splitNumberSet(
+    value: string | number | undefined,
+    basicValue: string | number | undefined,
+    options: I2NumberSplitOptions
+  ): [I2NumberSplitGroup[], I2NumberSplitGroup[]] {
+    return [NumberUtil.splitNumber(value, options), NumberUtil.splitNumber(basicValue, options)];
   }
 }
