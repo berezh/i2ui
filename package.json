@@ -1,6 +1,6 @@
 {
     "name": "i2ui",
-    "version": "2.0.0-alfa.5",
+    "version": "2.0.0-alfa.6",
     "description": "i2ui - Intuitively Understantable User Interface",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -30,6 +30,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "rollup": "^3.20.2",
+        "rollup-obfuscator": "^3.0.2",
         "rollup-plugin-scss": "^1.0.2",
         "stylelint": "^14.11.0",
         "stylelint-config-standard-scss": "^5.0.0",
@@ -84,7 +85,6 @@
         "dist"
     ],
     "dependencies": {
-        "emphasizer": "^1.4.3",
-        "rollup-obfuscator": "^3.0.2"
+        "emphasizer": "^1.4.3"
     }
 }
