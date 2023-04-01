@@ -12,7 +12,7 @@ export interface TagCloudProps {
   fromStyle: React.CSSProperties;
   toStyle: React.CSSProperties;
   order?: TagCloudOrder;
-  render?: (style: React.CSSProperties, record: any, index: number) => React.ReactElement;
+  render: (style: React.CSSProperties, record: any, index: number) => React.ReactElement;
   dataValueKey?: string;
 }
 
@@ -51,7 +51,7 @@ export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, or
     <div className={className} style={rootStyle}>
       {orderData.map((record, i) => {
         const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, record.rate);
-        return <React.Fragment key={i}>{render ? render(optionStyle, record, i) : <div style={optionStyle}>{record.text}</div>}</React.Fragment>;
+        return <React.Fragment key={i}>{render(optionStyle, record, i)}</React.Fragment>;
       })}
     </div>
   );
