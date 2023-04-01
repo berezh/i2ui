@@ -18,7 +18,7 @@ export interface TagCloudProps {
 
 export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, dataValueKey = "value" }) => {
   const handleParseValue = useCallback(
-    (record: any) => {
+    (record: any): number => {
       return NumberUtil.toFloat(record[dataValueKey]) || 0;
     },
     [dataValueKey]
@@ -50,7 +50,7 @@ export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, or
   return (
     <div className={className} style={rootStyle}>
       {orderData.map((record, i) => {
-        const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, record.rate);
+        const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, handleParseValue(record));
         return <React.Fragment key={i}>{render(optionStyle, record, i)}</React.Fragment>;
       })}
     </div>
