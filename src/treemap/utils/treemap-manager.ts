@@ -26,7 +26,11 @@ export class TreemapManager {
 
   private _rows = 0;
 
-  private _baseRate = 0;
+  private _baseRate: number | undefined = undefined;
+
+  private _maxCells: number | undefined = undefined;
+
+  private _minCellValue: number | undefined = undefined;
 
   private _cards: GridCardInfo[] = [];
 
@@ -45,13 +49,15 @@ export class TreemapManager {
     return this._cards;
   }
 
-  public init(cols: number, rows: number, data: any[], valueDataIndex = "rate", baseRate = 0) {
+  public init(cols: number, rows: number, data: any[], valueDataIndex = "rate", baseRate: number | undefined, maxCells?: number | undefined, minCellValue?: number | undefined) {
     this._count = 0;
     this._cols = cols;
     this._rows = rows;
     this._data = data;
     this._valueDataIndex = valueDataIndex;
     this._baseRate = baseRate;
+    this._maxCells = maxCells;
+    this._minCellValue = minCellValue;
     this.refresh();
   }
 
@@ -70,9 +76,9 @@ export class TreemapManager {
   }
 
   public refresh() {
-    const options = this._data
+    let options = this._data
       .map<RateOption>(x => {
-        return { ...x, __rate: this.getRecordRate(x) + this._baseRate };
+        return { ...x, __rate: this.getRecordRate(x) + (this._baseRate || 0) };
       })
       .filter(x => {
         return x.__rate > 0;
@@ -80,6 +86,14 @@ export class TreemapManager {
       .sort((a, b) => {
         return b.__rate - a.__rate;
       });
+
+    if (typeof this._minCellValue === "number") {
+      options = options.filter(x => x.__rate >= (this._minCellValue || 0));
+    }
+
+    if (typeof this._maxCells === "number") {
+      options = options.slice(0, this._maxCells);
+    }
 
     const rootRectangle: GridCardRect = {
       top: 0,

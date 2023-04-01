@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import { GridCardInfo, GridCellMeta } from "./utils/interface";
 import { TreemapManager } from "./utils/treemap-manager";
@@ -10,11 +10,16 @@ interface Props {
   gap?: number;
   dataValueKey?: string;
   data: any[];
-  baseRate?: number;
   render: (style: React.CSSProperties, record: any, index: number, rect: GridCellMeta) => React.ReactNode;
+  // maximum cells to display
+  maxCells?: number;
+  // minimum cell's value to display
+  minCellValue?: number;
+  // TEST
+  baseRate?: number;
 }
 
-export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render: renderCell, data, baseRate }) => {
+export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render: renderCell, data, baseRate, maxCells, minCellValue }) => {
   const rootStyle = useMemo<React.CSSProperties>(() => {
     return {
       display: "grid",
@@ -26,13 +31,9 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
 
   const cells = useMemo<GridCardInfo[]>(() => {
     const manager = new TreemapManager();
-    manager.init(rows, cols, data, dataValueKey, baseRate);
+    manager.init(rows, cols, data, dataValueKey, baseRate, maxCells, minCellValue);
     return manager.cards;
-  }, [rows, cols, data, dataValueKey, baseRate]);
-
-  useEffect(() => {
-    console.info("TREEMAP", className, rows, cols, gap, dataValueKey, data.length, "baseRate", baseRate);
-  }, [className, rows, cols, gap, dataValueKey, data, baseRate]);
+  }, [rows, cols, data, dataValueKey, baseRate, maxCells, minCellValue]);
 
   return (
     <div style={rootStyle} className={className}>
