@@ -1,10 +1,10 @@
-export interface SplitedNumberGroupProps {
+export interface I2NumberSplitGroup {
   text: string;
   separator?: string;
   isFraction?: boolean;
 }
 
-export interface SplitedNumberOptionsProps {
+export interface I2NumberSplitOptions {
   decimalDigits?: number;
   groupSeparator?: string;
   decimalSeparator?: string;
@@ -21,13 +21,15 @@ export class NumberUtil {
     return value;
   }
 
-  public static splitNumber(value: number | undefined, options: SplitedNumberOptionsProps): SplitedNumberGroupProps[] {
-    const result: SplitedNumberGroupProps[] = [];
+  public static splitNumber(value: string | number | undefined, options: I2NumberSplitOptions): I2NumberSplitGroup[] {
+    const result: I2NumberSplitGroup[] = [];
 
-    if (value !== undefined) {
+    const numberValue = NumberUtil.toFloat(value);
+
+    if (numberValue !== undefined) {
       const { decimalDigits, groupSeparator = ",", decimalSeparator, groupDigits } = options;
 
-      const stringValue: string = value.toFixed(decimalDigits || 0);
+      const stringValue: string = numberValue.toFixed(decimalDigits || 0);
       const splits: string[] = stringValue.split(".");
       if (splits.length > 0) {
         const groups = NumberUtil.toGroups(splits[0], groupDigits);

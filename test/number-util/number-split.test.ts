@@ -1,9 +1,9 @@
-import { NumberUtil, SplitedNumberOptionsProps, SplitedNumberGroupProps } from "../../src/utils";
+import { NumberUtil, I2NumberSplitOptions, I2NumberSplitGroup } from "../../src/utils";
 
 const testSeparator = "|";
 
-function textSplitNumber(value: number | undefined, options: SplitedNumberOptionsProps, ...splits: SplitedNumberGroupProps[]) {
-  expect(NumberUtil.splitNumber(value, options)).toMatchObject<SplitedNumberGroupProps[]>(splits);
+function textSplitNumber(value: number | undefined, options: I2NumberSplitOptions, ...splits: I2NumberSplitGroup[]) {
+  expect(NumberUtil.splitNumber(value, options)).toMatchObject<I2NumberSplitGroup[]>(splits);
 }
 
 describe("NumberUtil", () => {

@@ -25,6 +25,7 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
       display: "grid",
       gridTemplateColumns: `repeat(${cols}, 1fr)`,
       gridTemplateRows: `repeat(${rows}, 1fr)`,
+      boxSizing: "border-box",
       gap,
     };
   }, [rows, cols, gap]);
