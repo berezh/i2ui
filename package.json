@@ -31,7 +31,6 @@
         "react-dom": "^17.0.2",
         "rollup": "^3.20.2",
         "rollup-plugin-scss": "^1.0.2",
-        "rollup-plugin-uglify": "^6.0.3",
         "stylelint": "^14.11.0",
         "stylelint-config-standard-scss": "^5.0.0",
         "stylelint-config-varp": "^0.4.3",
@@ -85,6 +84,7 @@
         "dist"
     ],
     "dependencies": {
-        "emphasizer": "^1.4.3"
+        "emphasizer": "^1.4.3",
+        "rollup-obfuscator": "^3.0.2"
     }
 }

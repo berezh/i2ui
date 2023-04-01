@@ -1,5 +1,5 @@
 /* eslint-disable import/no-default-export */
-import { uglify } from "rollup-plugin-uglify";
+import { obfuscator } from "rollup-obfuscator";
 import typescript from "@rollup/plugin-typescript";
 
 import pkg from "./package.json";
@@ -8,11 +8,7 @@ import pkg from "./package.json";
 const plugins = [typescript()];
 
 if (process.env.BUILD === "production") {
-  plugins.push(
-    uglify({
-      nameCache: {},
-    })
-  );
+  plugins.push(obfuscator());
 }
 
 // scss({
