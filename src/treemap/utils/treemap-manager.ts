@@ -1,14 +1,14 @@
 import { RateOption } from "../../interfaces";
 import { NumberUtil } from "../../utils";
 import { GridRectUtil } from "./grid-rect";
-import { GridCardInfo, GridCardRect } from "./interface";
+import { TreemapCellInfo, TreemapCellRect } from "./interface";
 
 export interface TmNode {
   rate: number;
   rootRate: number;
   rootSquare: number;
   record: any | undefined;
-  rect: GridCardRect;
+  rect: TreemapCellRect;
   children: TmNode[];
 }
 
@@ -29,7 +29,11 @@ export class TreemapManager {
 
   private _minCellValue: number | undefined = undefined;
 
-  private _cards: GridCardInfo[] = [];
+  private _cards: TreemapCellInfo[] = [];
+
+  private _minValue = 0;
+
+  private _maxValue = 0;
 
   private _dataValueKey = "";
 
@@ -42,7 +46,7 @@ export class TreemapManager {
     children: [],
   };
 
-  public get cards(): GridCardInfo[] {
+  public get cards(): TreemapCellInfo[] {
     return this._cards;
   }
 
@@ -70,6 +74,11 @@ export class TreemapManager {
         return b.__rate - a.__rate;
       });
 
+    const rates = options.map(x => x.__rate);
+
+    this._minValue = Math.min(...rates);
+    this._maxValue = Math.max(...rates);
+
     if (typeof this._minCellValue === "number") {
       options = options.filter(x => x.__rate >= (this._minCellValue || 0));
     }
@@ -78,7 +87,7 @@ export class TreemapManager {
       options = options.slice(0, this._maxCells);
     }
 
-    const rootRectangle: GridCardRect = {
+    const rootRectangle: TreemapCellRect = {
       top: 0,
       left: 0,
       width: this._rows,
@@ -90,7 +99,7 @@ export class TreemapManager {
     this.initCard(this.rootNode, this._cards);
   }
 
-  private initNode(options: any[], rect: GridCardRect, rootRate: number, rootSquare: number): TmNode {
+  private initNode(options: any[], rect: TreemapCellRect, rootRate: number, rootSquare: number): TmNode {
     this._count++;
     const nodeRate = options.reduce((sum, x) => sum + x.__rate, 0);
     const children: TmNode[] = [];
@@ -130,11 +139,14 @@ export class TreemapManager {
     };
   }
 
-  private initCard(node: TmNode, cards: GridCardInfo[]) {
+  private initCard(node: TmNode, cards: TreemapCellInfo[]) {
     if (node.record) {
       cards.push({
+        value: node.rate,
         record: node.record,
         rect: node.rect,
+        minValue: this._minValue,
+        maxValue: this._maxValue,
       });
     }
     node.children.forEach(x => {

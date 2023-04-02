@@ -1,11 +1,11 @@
-import { GridCardRect } from "./interface";
+import { TreemapCellRect } from "./interface";
 
 export class GridRectUtil {
-  public static rect(left: number, top: number, width: number, height: number): GridCardRect {
+  public static rect(left: number, top: number, width: number, height: number): TreemapCellRect {
     return { left, top, width, height };
   }
 
-  public static split(rect: GridCardRect, rate1: number, rate2: number): [GridCardRect, GridCardRect] {
+  public static split(rect: TreemapCellRect, rate1: number, rate2: number): [TreemapCellRect, TreemapCellRect] {
     const horizontal = rect.width - rect.left;
     const vertical = rect.height - rect.top;
     const isVertical = vertical >= horizontal;
@@ -14,7 +14,7 @@ export class GridRectUtil {
 
     if (isVertical) {
       const height = rect.top + delta;
-      const result: [GridCardRect, GridCardRect] = [
+      const result: [TreemapCellRect, TreemapCellRect] = [
         {
           ...rect,
           height,
@@ -33,7 +33,7 @@ export class GridRectUtil {
       return result;
     } else {
       const width = rect.left + delta;
-      const result: [GridCardRect, GridCardRect] = [
+      const result: [TreemapCellRect, TreemapCellRect] = [
         {
           ...rect,
           width,
@@ -52,7 +52,7 @@ export class GridRectUtil {
     }
   }
 
-  public static square(rect: GridCardRect): number {
+  public static square(rect: TreemapCellRect): number {
     const { width, left, height, top } = rect;
     const horizontal = width - left;
     const vertical = height - top;

@@ -1,16 +1,20 @@
-export interface GridCardInfo {
+export interface TreemapCellInfo {
   record: any;
-  rect: GridCardRect;
+  rect: TreemapCellRect;
+  value: number;
+  minValue: number;
+  maxValue: number;
 }
 
-export interface GridCardRect {
+export interface TreemapCellRect {
   top: number;
   left: number;
   width: number;
   height: number;
 }
 
-export interface GridCellMeta extends GridCardRect {
-  rootRate: number;
-  rootSquare: number;
+export interface TreemapCellOptions extends TreemapCellRect {
+  minValue: number;
+  maxValue: number;
+  value: number;
 }
