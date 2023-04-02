@@ -27,3 +27,13 @@ export interface I2NumberProps {
   value?: number | string;
   children?: number | string;
 }
+
+export interface RateOption {
+  __rate: number;
+  [key: string]: any;
+}
+
+export interface TagCloudRecordOptions {
+  maxValue: number;
+  minValue: number;
+}

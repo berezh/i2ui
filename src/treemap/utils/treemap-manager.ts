@@ -1,3 +1,5 @@
+import { RateOption } from "../../interfaces";
+import { NumberUtil } from "../../utils";
 import { GridRectUtil } from "./grid-rect";
 import { GridCardInfo, GridCardRect } from "./interface";
 
@@ -8,11 +10,6 @@ export interface TmNode {
   record: any | undefined;
   rect: GridCardRect;
   children: TmNode[];
-}
-
-interface RateOption {
-  __rate: number;
-  [key: string]: any;
 }
 
 const SPLIT_RATIO = 0.5;
@@ -34,7 +31,7 @@ export class TreemapManager {
 
   private _cards: GridCardInfo[] = [];
 
-  private _valueDataIndex = "";
+  private _dataValueKey = "";
 
   public rootNode: TmNode = {
     rate: 0,
@@ -49,36 +46,22 @@ export class TreemapManager {
     return this._cards;
   }
 
-  public init(cols: number, rows: number, data: any[], valueDataIndex = "rate", baseRate: number | undefined, maxCells?: number | undefined, minCellValue?: number | undefined) {
+  public init(cols: number, rows: number, data: any[], dataValueKey = "rate", baseRate: number | undefined, maxCells?: number | undefined, minCellValue?: number | undefined) {
     this._count = 0;
     this._cols = cols;
     this._rows = rows;
     this._data = data;
-    this._valueDataIndex = valueDataIndex;
+    this._dataValueKey = dataValueKey;
     this._baseRate = baseRate;
     this._maxCells = maxCells;
     this._minCellValue = minCellValue;
     this.refresh();
   }
 
-  private getRecordRate(record: any): number {
-    const rate = record[this._valueDataIndex];
-    if (typeof rate === "number") {
-      return rate;
-    } else if (typeof rate === "string") {
-      const fv = parseFloat(rate);
-      if (fv.toString() === rate.toString()) {
-        return fv;
-      }
-    }
-
-    return 0;
-  }
-
   public refresh() {
     let options = this._data
       .map<RateOption>(x => {
-        return { ...x, __rate: this.getRecordRate(x) + (this._baseRate || 0) };
+        return { ...x, __rate: NumberUtil.anyToFloat(x[this._dataValueKey]) + (this._baseRate || 0) };
       })
       .filter(x => {
         return x.__rate > 0;

@@ -19,7 +19,7 @@ interface Props {
   baseRate?: number;
 }
 
-export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render: renderCell, data, baseRate, maxCells, minCellValue }) => {
+export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render, data, baseRate, maxCells, minCellValue }) => {
   const rootStyle = useMemo<React.CSSProperties>(() => {
     return {
       display: "grid",
@@ -41,7 +41,7 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
       {cells.map(({ rect, record }, i) => {
         const { left, top, width, height } = rect;
         const cellStyle: React.CSSProperties = { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
-        return renderCell(cellStyle, record, i, { left, top, width, height, rootRate: 0, rootSquare: 0 });
+        return render(cellStyle, record, i, { left, top, width, height, rootRate: 0, rootSquare: 0 });
       })}
     </div>
   );

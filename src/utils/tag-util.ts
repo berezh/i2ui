@@ -1,12 +1,12 @@
-import { TagCloudOrder } from "..";
+import { RateOption, TagCloudOrder } from "..";
 
 export class TagUtil {
-  public static order(data: any[], order: TagCloudOrder, parse: (record: any) => number): any[] {
+  public static order(data: RateOption[], order: TagCloudOrder): RateOption[] {
     if (order === "desc" || order === "middle") {
       let result: any[] = data.sort((a, b) => {
-        if (parse(a) > parse(b)) {
+        if (a.__rate > b.__rate) {
           return -1;
-        } else if (parse(a) < parse(b)) {
+        } else if (a.__rate < b.__rate) {
           return 1;
         }
         return 0;
@@ -27,9 +27,9 @@ export class TagUtil {
       return result;
     } else if (order === "asc" || order === "edge") {
       let result: any[] = data.sort((a, b) => {
-        if (parse(a) < parse(b)) {
+        if (a.__rate < b.__rate) {
           return -1;
-        } else if (parse(a) > parse(b)) {
+        } else if (a.__rate > b.__rate) {
           return 1;
         }
         return 0;

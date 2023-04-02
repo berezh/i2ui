@@ -10,6 +10,19 @@ export class NumberUtil {
     return value;
   }
 
+  public static anyToFloat(value: any): number {
+    if (typeof value === "number") {
+      return value;
+    } else if (typeof value === "string") {
+      const tryNumberValue = parseFloat(value);
+      if (tryNumberValue.toString() === value.toString()) {
+        return tryNumberValue;
+      }
+    }
+
+    return 0;
+  }
+
   public static toGroups(integer: string, groupDigits?: number): string[] {
     if (groupDigits === 0) {
       return [integer];
