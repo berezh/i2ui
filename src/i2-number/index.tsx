@@ -9,7 +9,7 @@ export const I2Number: React.FC<I2NumberProps> = ({
   fromStyle,
   toStyle,
   decimalDigits,
-  verticalAlign: align,
+  verticalAlign,
   className,
   style,
   groupSeparator,
@@ -26,13 +26,13 @@ export const I2Number: React.FC<I2NumberProps> = ({
 
   const contentStyle = useMemo<React.CSSProperties>(() => {
     const result: React.CSSProperties = { display: "flex", flexDirection: "row", alignItems: "flex-end" };
-    if (align === "top") {
+    if (verticalAlign === "top") {
       result.alignItems = "flex-start";
-    } else if (align === "center") {
+    } else if (verticalAlign === "center") {
       result.alignItems = "center";
     }
     return result;
-  }, [align]);
+  }, [verticalAlign]);
 
   const rootStyle = useMemo<React.CSSProperties>(() => {
     return { display: "inline-block", ...style };

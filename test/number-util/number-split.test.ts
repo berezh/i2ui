@@ -1,4 +1,5 @@
-import { NumberUtil, I2NumberSplitOptions, I2NumberSplitGroup } from "../../src/utils";
+import { I2NumberSplitGroup, I2NumberSplitOptions } from "../../src";
+import { NumberUtil } from "../../src/utils";
 
 const testSeparator = "|";
 

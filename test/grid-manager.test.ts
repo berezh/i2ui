@@ -1,8 +1,8 @@
+import { TreemapCellRect } from "../src";
 import { GridRectUtil } from "../src/treemap/utils/grid-rect";
-import { GridCardRect } from "../src/treemap/utils/interface";
 
-function splitTest(rect: GridCardRect, rate1: number, rate2: number, result1: GridCardRect, result2: GridCardRect) {
-  expect(GridRectUtil.split(rect, rate1, rate2)).toEqual<[GridCardRect, GridCardRect]>([result1, result2]);
+function splitTest(rect: TreemapCellRect, rate1: number, rate2: number, result1: TreemapCellRect, result2: TreemapCellRect) {
+  expect(GridRectUtil.split(rect, rate1, rate2)).toEqual<[TreemapCellRect, TreemapCellRect]>([result1, result2]);
 }
 
 describe("GridRectUtil", () => {
