@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { TreemapCellInfo, TreemapCellOptions } from "./utils/interface";
 import { TreemapManager } from "./utils/treemap-manager";
 import { TreemapMode } from "../interfaces";
+import { useElementSize } from "../utils/hooks/size";
 
 interface Props {
   className?: string;
@@ -18,11 +19,22 @@ interface Props {
   minCellValue?: number;
   // mode
   mode?: TreemapMode;
+  // size
+  size?: number;
   // TEST
   baseRate?: number;
 }
 
-export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, gap, dataValueKey = "value", render, data, baseRate, maxCells, minCellValue, mode }) => {
+export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey = "value", render, data, baseRate, maxCells, minCellValue, mode, size: cols = 50 }) => {
+  const [squareRef, { width, height }] = useElementSize();
+
+  const rows = useMemo(() => {
+    if (width && height) {
+      return Math.round(cols * (height / width));
+    }
+    return cols;
+  }, [cols, width, height]);
+
   const rootStyle = useMemo<React.CSSProperties>(() => {
     let gridRows = rows;
     let gridCols = cols;
@@ -46,7 +58,7 @@ export const Treemap: React.FC<Props> = ({ className, rows = 100, cols = 100, ga
   }, [rows, cols, data, dataValueKey, baseRate, maxCells, minCellValue]);
 
   return (
-    <div style={rootStyle} className={className}>
+    <div style={rootStyle} className={className} ref={squareRef}>
       {cells.map(({ rect, record, minValue, maxValue, value }, i) => {
         const { left, top, width, height } = rect;
         const cellStyle: React.CSSProperties = mode === "none" ? {} : { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
