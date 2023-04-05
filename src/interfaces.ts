@@ -26,6 +26,8 @@ export interface I2NumberProps {
   basicMaxValue?: number | string;
   value?: number | string;
   children?: number | string;
+  prefix?: string;
+  ending?: string;
 }
 
 export interface RateOption {

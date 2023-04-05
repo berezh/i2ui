@@ -18,11 +18,13 @@ export const I2Number: React.FC<I2NumberProps> = ({
   basicMaxValue,
   value,
   children,
+  prefix,
+  ending,
 }) => {
   const parts = useMemo<{ style: React.CSSProperties; children: string }[]>(() => {
     const currentValue = children || value;
-    return parseI2Number({ value: currentValue, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue });
-  }, [value, children, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue]);
+    return parseI2Number({ value: currentValue, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue, prefix, ending });
+  }, [value, children, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue, prefix, ending]);
 
   const contentStyle = useMemo<React.CSSProperties>(() => {
     const result: React.CSSProperties = { display: "flex", flexDirection: "row", alignItems: "flex-end" };

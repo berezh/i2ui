@@ -4,7 +4,7 @@ import { I2NumberProps } from "../interfaces";
 import { NumberUtil } from "../utils";
 
 export function parseI2Number(options: Omit<I2NumberProps, "children" | "className" | "style">) {
-  const { value, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue } = options;
+  const { value, fromStyle, toStyle, decimalDigits, decimalSeparator, groupSeparator, groupDigits, basicMaxValue, prefix, ending } = options;
   const [splits, basicSplits] = NumberUtil.splitNumberSet(value, basicMaxValue || value, {
     decimalDigits,
     decimalSeparator,
@@ -12,7 +12,10 @@ export function parseI2Number(options: Omit<I2NumberProps, "children" | "classNa
     groupDigits,
   });
   const maxRate: number = basicSplits.length;
+
   return splits.map(({ text, separator }, i) => {
+    const currPrefix = i === 0 && prefix ? prefix : "";
+    const currEnding = i === splits.length - 1 && ending ? ending : "";
     return {
       style: {
         lineHeight: "1em",
@@ -30,7 +33,7 @@ export function parseI2Number(options: Omit<I2NumberProps, "children" | "classNa
           splits.length - i
         ),
       },
-      children: `${separator || ""}${text}`,
+      children: `${currPrefix}${separator || ""}${text}${currEnding}`,
     };
   });
 }
