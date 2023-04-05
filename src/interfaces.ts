@@ -37,3 +37,5 @@ export interface TagCloudRecordOptions {
   maxValue: number;
   minValue: number;
 }
+
+export type TreemapMode = "emphasize" | "none";
