@@ -38,6 +38,7 @@ export interface RateOption {
 export interface TagCloudRecordOptions {
   maxValue: number;
   minValue: number;
+  value: number;
 }
 
 export type TreemapMode = "emphasize" | "none";

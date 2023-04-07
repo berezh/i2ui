@@ -50,8 +50,8 @@ export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, or
   return (
     <div className={className} style={rootStyle}>
       {orderData.map(({ __rate, ...record }, i) => {
-        const optionStyle = emphasizeStyle(fromStyle, toStyle, min, max, __rate);
-        return render(optionStyle, record, i, { minValue: min, maxValue: max });
+        const optionStyle: React.CSSProperties = emphasizeStyle(fromStyle, toStyle, min, max, __rate);
+        return render(optionStyle, record, i, { minValue: min, maxValue: max, value: __rate });
       })}
     </div>
   );
