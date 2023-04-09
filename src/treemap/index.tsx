@@ -29,14 +29,15 @@ export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render,
   const [squareRef, { width, height }] = useElementSize();
 
   const innerDataValueKey = useMemo(() => {
-    return mode === "none" ? "value" : dataValueKey;
+    return mode === "none" ? "__staticValue" : dataValueKey;
   }, [dataValueKey, mode]);
 
   const innerData = useMemo(() => {
     return mode === "none"
-      ? data.map(() => {
+      ? data.map(x => {
           return {
-            value: 1,
+            ...x,
+            __staticValue: 1,
           };
         })
       : data;
