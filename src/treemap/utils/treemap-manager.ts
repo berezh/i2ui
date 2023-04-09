@@ -50,7 +50,7 @@ export class TreemapManager {
     return this._cards;
   }
 
-  public init(cols: number, rows: number, data: any[], dataValueKey = "rate", baseRate: number | undefined, maxCells?: number | undefined, minCellValue?: number | undefined) {
+  public init(cols: number, rows: number, data: any[], dataValueKey = "", baseRate: number | undefined, maxCells?: number | undefined, minCellValue?: number | undefined) {
     this._count = 0;
     this._cols = cols;
     this._rows = rows;

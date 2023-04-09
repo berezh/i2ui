@@ -4,6 +4,11 @@
     "source.fixAll.eslint": true
   },
   "eslint.validate": ["typescript", "typescriptreact", "javascript", "javascriptreact", "markdown", "json"],
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
   "stylelint.validate": [
     "scss"
   ],
