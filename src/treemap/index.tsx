@@ -28,49 +28,42 @@ interface Props {
 export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render, data, baseRate, maxCells, minCellValue, mode, size: cols = 50 }) => {
   const [squareRef, { width, height }] = useElementSize();
 
-  const innerDataValueKey = useMemo(() => {
-    return mode === "none" ? "__staticValue" : dataValueKey;
-  }, [dataValueKey, mode]);
-
-  const innerData = useMemo(() => {
-    return mode === "none"
-      ? data.map(x => {
-          return {
-            ...x,
-            __staticValue: 1,
-          };
-        })
-      : data;
-  }, [data, mode]);
-
-  const rows = useMemo(() => {
+  const size = useMemo(() => {
+    const length = data?.length || 0;
     if (width && height) {
-      return Math.round(cols * (height / width));
+      const radio = height / width;
+      return [cols, Math.round(cols * radio)];
     }
-    return cols;
-  }, [cols, width, height]);
+
+    if (mode === "none") {
+      const edge = Math.ceil(Math.sqrt(length));
+      return [edge, edge];
+    } else {
+      return [cols, cols];
+    }
+  }, [cols, width, height, mode, data]);
 
   const rootStyle = useMemo<React.CSSProperties>(() => {
     return {
       display: "grid",
-      gridTemplateColumns: `repeat(${cols}, 1fr)`,
-      gridTemplateRows: `repeat(${rows}, 1fr)`,
+      gridTemplateColumns: `repeat(${size[0]}, 1fr)`,
+      gridTemplateRows: `repeat(${size[1]}, 1fr)`,
       boxSizing: "border-box",
       gap,
     };
-  }, [rows, cols, gap]);
+  }, [size, gap]);
 
   const cells = useMemo<TreemapCellInfo[]>(() => {
     const manager = new TreemapManager();
-    manager.init(rows, cols, innerData, innerDataValueKey, baseRate, maxCells, minCellValue);
+    manager.init(size[1], cols, data, dataValueKey, baseRate, maxCells, minCellValue);
     return manager.cards;
-  }, [rows, cols, innerData, innerDataValueKey, baseRate, maxCells, minCellValue]);
+  }, [size, data, dataValueKey, baseRate, maxCells, minCellValue]);
 
   return (
     <div style={rootStyle} className={className} ref={squareRef}>
       {cells.map(({ rect, record, minValue, maxValue, value }, i) => {
         const { left, top, width, height } = rect;
-        const cellStyle: React.CSSProperties = { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
+        const cellStyle: React.CSSProperties = mode === "none" ? {} : { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
         return render(cellStyle, record, i, { left, top, width, height, minValue, maxValue, value });
       })}
     </div>
