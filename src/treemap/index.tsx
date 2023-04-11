@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { CSSProperties, ReactNode, useMemo } from "react";
 
 import { TreemapCellInfo, TreemapCellOptions } from "./utils/interface";
 import { TreemapManager } from "./utils/treemap-manager";
@@ -7,12 +7,10 @@ import { useElementSize } from "../utils/hooks/size";
 
 interface Props {
   className?: string;
-  rows?: number;
-  cols?: number;
   gap?: number;
-  dataValueKey?: string;
+  dataValueKey: string;
   data: any[];
-  render: (style: React.CSSProperties, record: any, index: number, rect: TreemapCellOptions) => React.ReactNode;
+  render: (style: CSSProperties, record: any, index: number, rect: TreemapCellOptions) => ReactNode;
   // maximum cells to display
   maxCells?: number;
   // minimum cell's value to display
@@ -25,7 +23,7 @@ interface Props {
   baseRate?: number;
 }
 
-export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render, data, baseRate, maxCells, minCellValue, mode, size: cols = 50 }) => {
+export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render, data, baseRate, maxCells, minCellValue, mode, size: cols = 30 }) => {
   const [squareRef, { width, height }] = useElementSize();
 
   const size = useMemo(() => {
