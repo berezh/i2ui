@@ -1,6 +1,6 @@
 {
     "name": "i2ui",
-    "version": "2.0.0",
+    "version": "2.0.5",
     "description": "i2ui - Intuitively Understantable User Interface",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -64,16 +64,15 @@
         "type": "git",
         "url": "git+https://github.com/berezh/i2ui.git"
     },
-    "keywords": [
-        "tag-cloud",
-        "tagcloud",
-        "react-tag-cloud",
-        "word-cloud",
-        "wordcloud",
-        "react",
-        "number",
-        "number-group",
-        "emphase"
+    "keywords": [        
+        "treemap",
+        "treemap cards",
+        "cards",
+        "tag cloud",
+        "styled number",
+        "number style",
+        "intuitive style",
+        "emphasizer"
     ],
     "author": "Vadym Poberezhnyi",
     "license": "MIT",
