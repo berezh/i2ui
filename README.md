@@ -64,7 +64,7 @@ function renderCell(style, record, index) {
 
 ## I2Number
 
-<a href="http://i2ui.com/#i2number" target="_blank">Live Demo</a>
+<a href="https://varp.com/number" target="_blank">Demo</a>
 
 <div align="center">
     <img style="width:194px" src='./images/i2-number.jpg'>
