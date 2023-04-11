@@ -29,14 +29,22 @@ export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render,
   const [squareRef, { width, height }] = useElementSize();
 
   const size = useMemo(() => {
-    const length = data?.length || 0;
+    const count = data?.length || 0;
     if (width && height) {
-      const radio = height / width;
-      return [cols, Math.round(cols * radio)];
+      if (mode === "none") {
+        const totalS = width * height;
+        const cellS = Math.ceil(Math.sqrt(totalS / count));
+        const cols = Math.round(width / cellS);
+        const rows = Math.ceil(count / cols);
+        return [cols, rows];
+      } else {
+        const radio = height / width;
+        return [cols, Math.round(cols * radio)];
+      }
     }
 
     if (mode === "none") {
-      const edge = Math.ceil(Math.sqrt(length));
+      const edge = Math.ceil(Math.sqrt(count));
       return [edge, edge];
     } else {
       return [cols, cols];
