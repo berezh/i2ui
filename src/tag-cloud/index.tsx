@@ -14,7 +14,7 @@ export interface TagCloudProps {
   toStyle: React.CSSProperties;
   order?: TagCloudOrder;
   render: (style: React.CSSProperties, record: any, index: number, options: TagCloudRecordOptions) => React.ReactElement;
-  dataValueKey?: string;
+  dataValueKey: string;
 }
 
 export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, dataValueKey = "value" }) => {
