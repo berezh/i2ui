@@ -57,7 +57,7 @@ function renderCell(style, record, index) {
 | `maxCells`     | false    | `number`                                                                        | Max cells to display                                                       |
 | `minCellValue` | false    | `any`                                                                           | Mix value to display                                                       |
 | `size`         | false    | `number`                                                                        | Size of treemap scale. The smaller the simplest treemap is. Default - `30` |
-| `mode`         | false    | `emphasize`, 'none'                                                             | When `node`, cards is shown as equal cards. Default - `emphasize`          |
+| `mode`         | false    | `emphasize`, `none`                                                            | When `node`, cards is shown as equal cards. Default - `emphasize`          |
 | `className`    | false    | `string`                                                                        | Container's class name                                                     |
 
 <br/>
