@@ -1,6 +1,6 @@
 # i2ui
 
-Intuitively Understantable User Interface
+Intuitively Understandable User Interface
 
 <a href="https://www.npmjs.com/package/i2ui">
     <img src="https://nodei.co/npm/i2ui.png?mini=true">
@@ -25,7 +25,10 @@ npm install i2ui
 
 ## Treemap
 
-<a href="https://varp.com/treemap" target="_blank">Demo</a>
+Cards representation on treemap view. The size or square of each card is based on it's value.
+
+<a href="http://i2ui.com/treemap" target="_blank">Demo 1</a> |
+<a href="https://varp.com/treemap" target="_blank">Demo 2</a>
 
 <div align="center">
     <img style="width:579px" src='./images/treemap.jpg'>
@@ -64,7 +67,10 @@ function renderCell(style, record, index) {
 
 ## I2Number
 
-<a href="https://varp.com/number" target="_blank">Demo</a>
+Visual representation of a number split on groups and fraction. The higher group emphasizes more with CSS styles.
+
+<a href="http://i2ui.com/i2-number" target="_blank">Demo 1</a> |
+<a href="https://varp.com/number" target="_blank">Demo 2</a>
 
 <div align="center">
     <img style="width:194px" src='./images/i2-number.jpg'>
@@ -109,7 +115,10 @@ data.map((record, index)=> {
 
 ## TagCloud
 
-<a href="https://varp.com/tag-cloud" target="_blank">Demo</a>
+Visual representation of text data, which is often used to visualize free form text
+
+<a href="http://i2ui.com/tag-cloud" target="_blank">Demo 1</a> |
+<a href="https://varp.com/tag-cloud" target="_blank">Demo 2</a>
 
 <div align="center">
     <img style="width:579px" src='./images/tag-cloud.jpg'>
