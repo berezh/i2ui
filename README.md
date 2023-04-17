@@ -1,6 +1,8 @@
 # i2ui
 
-Intuitively Understandable User Interface
+Intuitively Understandable User Interface 
+
+React components for emphasizing essential data
 
 <a href="https://www.npmjs.com/package/i2ui">
     <img src="https://nodei.co/npm/i2ui.png?mini=true">
