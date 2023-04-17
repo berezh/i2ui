@@ -11,7 +11,6 @@
         "@types/react-dom": "^17.0.11",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
         "@typescript-eslint/parser": "^5.6.0",
-        "concurrently": "^4.1.1",
         "cross-env": "^7.0.3",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.8.0",
@@ -50,21 +49,18 @@
         "build": "rollup -c --bundleConfigAsCjs",
         "build:dev": "cross-env BUILD=dev rollup -c --bundleConfigAsCjs",
         "build-watch": "rollup -c -w",
-        "install-all": "npm i && cd example && npm i",
         "start-e": "cd ucase && npm start",
         "build-e": "npm run build && cd sample && npm run build",
-        "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
         "test": "jest",
         "prepublishOnly": "npm run test && npm run lint",
-        "lint:old": "eslint ./src/**/*.ts ./src/**/*.tsx ./example/src/**/*.ts ./example/src/**/*.tsx",
-        "lint": "stylelint \"**/*.scss\" && eslint .",
-        "lint:fix": "stylelint \"**/*.scss\" --fix && eslint . --fix"
+        "lint": "eslint . && stylelint \"**/*.scss\"",
+        "lint:fix": "eslint . --fix && stylelint \"**/*.scss\" --fix"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/berezh/i2ui.git"
     },
-    "keywords": [        
+    "keywords": [
         "treemap",
         "treemap cards",
         "cards",
