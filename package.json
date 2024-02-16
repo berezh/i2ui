@@ -5,6 +5,7 @@
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
     "devDependencies": {
+        "@rollup/plugin-typescript": "^11.1.6",
         "@types/jest": "^24.0.20",
         "@types/react": "^17.0.37",
         "@types/react-dom": "^17.0.11",
