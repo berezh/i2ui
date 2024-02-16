@@ -1,6 +1,6 @@
 {
     "name": "i2ui",
-    "version": "2.1.2",
+    "version": "2.2.0",
     "description": "i2ui - Intuitively Understandable User Interface",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
