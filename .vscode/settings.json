@@ -1,12 +1,14 @@
 {  
+  "editor.tabSize": 2,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {      
+    "source.fixAll.eslint": "always"
   },
   "eslint.validate": ["typescript", "typescriptreact", "javascript", "javascriptreact", "markdown", "json"],
   "[scss]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
+      "source.fixAll.stylelint": "always"
     }
   },
   "stylelint.validate": [
