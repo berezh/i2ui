@@ -17,7 +17,16 @@ export interface TagCloudProps {
   dataValueKey: string;
 }
 
-export const TagCloud: React.FC<TagCloudProps> = ({ data, fromStyle, toStyle, order = "middle", className, style, render, dataValueKey = "value" }) => {
+export const TagCloud: React.FC<TagCloudProps> = ({
+  data,
+  fromStyle,
+  toStyle,
+  order = "middle",
+  className,
+  style,
+  render,
+  dataValueKey = "value",
+}) => {
   const rateData = useMemo<RateOption[]>(() => {
     return data.map(x => {
       return { ...x, __rate: NumberUtil.anyToFloat(x[dataValueKey]) };

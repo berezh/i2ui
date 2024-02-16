@@ -1,6 +1,5 @@
-/* eslint-disable import/no-default-export */
-import { obfuscator } from "rollup-obfuscator";
 import typescript from "@rollup/plugin-typescript";
+import { obfuscator } from "rollup-obfuscator";
 
 import pkg from "./package.json";
 // import fs from 'fs';

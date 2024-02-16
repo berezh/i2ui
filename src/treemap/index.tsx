@@ -69,7 +69,8 @@ export const Treemap: React.FC<Props> = ({ className, gap, dataValueKey, render,
     <div style={rootStyle} className={className} ref={squareRef}>
       {cells.map(({ rect, record, minValue, maxValue, value }, i) => {
         const { left, top, width, height } = rect;
-        const cellStyle: React.CSSProperties = mode === "none" ? {} : { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
+        const cellStyle: React.CSSProperties =
+          mode === "none" ? {} : { gridColumn: `${left + 1} / ${width + 1}`, gridRow: `${top + 1} / ${height + 1}` };
         return render(cellStyle, record, i, { left, top, width, height, minValue, maxValue, value });
       })}
     </div>
